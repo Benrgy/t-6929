@@ -34,22 +34,6 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
@@ -80,14 +64,6 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -97,51 +73,28 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
   }
 }
 
-/* Mountain background and separator styles */
-.mountain-backdrop {
-  background-color: #E0F2FE;
-  position: relative;
-  overflow: hidden;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-.mountain-backdrop::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  background-image: url('/lovable-uploads/c4742e9b-f761-4b4d-ac89-27ad68159236.png');
-  background-position: bottom center;
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-  opacity: 0.7;
-  z-index: 1;
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
 }
 
-.separator-container {
-  position: relative;
-  height: 12px;
-  margin-bottom: 2rem;
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 rounded;
 }
 
-.separator-line {
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  background-color: #CBD5E1;
-}
-
-.separator-line-1 {
-  top: 0;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.separator-line-2 {
-  bottom: 0;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
 }

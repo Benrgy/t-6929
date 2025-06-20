@@ -1,8 +1,8 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { translations } from '../data/translations';
+import { algarveTranslations } from '../data/algarveTranslations';
 
-type Language = 'en' | 'es';
+type Language = 'en' | 'nl';
 
 interface LanguageContextType {
   language: Language;
@@ -11,17 +11,17 @@ interface LanguageContextType {
 }
 
 export const LanguageContext = createContext<LanguageContextType>({
-  language: 'es',
+  language: 'nl',
   setLanguage: () => {},
   t: (key: string) => key
 });
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('es');
+  const [language, setLanguage] = useState<Language>('nl');
 
   const t = (key: string): string => {
     if (!key) return '';
-    return translations[key]?.[language] || key;
+    return algarveTranslations[key]?.[language] || key;
   };
 
   return (

@@ -1,167 +1,211 @@
 
-import React from 'react';
-import { trails } from '../data/trails';
-import { beaches } from '../data/beaches';
-import LanguageSwitcher from '../components/LanguageSwitcher';
+import React, { useState, useMemo } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import FiltersDialog from '../components/FiltersDialog';
-import CategoryFilter from '../components/CategoryFilter';
-import DayHikesSection from '../components/DayHikesSection';
-import MultiDayHikesSection from '../components/MultiDayHikesSection';
-import CategorySection from '../components/CategorySection';
-import BeachesSection from '../components/BeachesSection';
-import { useTrailFilters } from '../hooks/useTrailFilters';
-import { useTrailLists } from '../hooks/useTrailLists';
+import LanguageSwitcher from '../components/LanguageSwitcher';
+import SearchBar from '../components/SearchBar';
+import CategoryGrid from '../components/CategoryGrid';
+import AlgarveLocationCard from '../components/AlgarveLocationCard';
+import FAQSection from '../components/FAQSection';
+import { ContentCategory } from '../types/algarve';
+import { algarveLocations } from '../data/algarveLocations';
+import { algarveQA } from '../data/algarveQA';
 import { Helmet } from 'react-helmet';
-import { Separator } from '../components/ui/separator';
-
-// Trails to exclude from non-walking-path category views
-const excludedTrailNames = ['Playa Muñoz']; // Removed 'Cascada de los Duendes' from excluded names
-// Specific IDs to exclude (more reliable than name matching)
-const excludedTrailIds = ['12']; // 12=Playa Muñoz - Only exclude from non-walking-path categories
+import { Button } from '../components/ui/button';
+import { ExternalLink } from 'lucide-react';
 
 const Index = () => {
   const { t } = useLanguage();
-  
-  const {
-    filters,
-    filteredBeaches,
-    allHikes,
-    dayHikes,
-    multiDayHikes,
-  } = useTrailFilters(trails, beaches);
+  const [selectedCategory, setSelectedCategory] = useState<ContentCategory | 'all'>('all');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const {
-    directAccessHikes,
-    otherDayHikes,
-    pampLindaHikes,
-    otherMultiDayHikes,
-    categoryBarilochieHikes,
-    categoryPampLindaHikes
-  } = useTrailLists(allHikes, dayHikes, multiDayHikes);
-
-  // Get Villa Tacul beach for the walking-path category
-  const villaTaculBeach = beaches.find(beach => beach.name === "Villa Tacul");
-  const walkingPathBeaches = villaTaculBeach ? [villaTaculBeach] : [];
-
-  const shouldShowBeaches = filters.selectedCategory === 'all' || filters.selectedCategory === 'beaches-lakes';
-  const shouldShowDayHikes = filters.selectedCategory === 'all' && (filters.selectedType === 'all' || filters.selectedType === 'day-hike');
-  const shouldShowMultiDayHikes = filters.selectedCategory === 'all' && (filters.selectedType === 'all' || filters.selectedType === 'multi-day');
-  const shouldShowCategorySection = filters.selectedCategory !== 'all' && filters.selectedCategory !== 'beaches-lakes';
-
-  // Special case for walking-path category - include Cascada de los Duendes (ID 7)
-  const categoryHikes = filters.selectedCategory === 'walking-path' 
-    ? allHikes.filter(trail => trail.category === filters.selectedCategory) 
-    : allHikes.filter(trail => 
-        trail.category === filters.selectedCategory &&
-        !excludedTrailIds.includes(trail.id)
+  const filteredLocations = useMemo(() => {
+    let filtered = algarveLocations;
+    
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(location => location.category === selectedCategory);
+    }
+    
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(location => 
+        location.name.toLowerCase().includes(query) ||
+        location.description.en.toLowerCase().includes(query) ||
+        location.description.nl.toLowerCase().includes(query) ||
+        location.highlights.some(highlight => highlight.toLowerCase().includes(query))
       );
+    }
+    
+    return filtered;
+  }, [selectedCategory, searchQuery]);
 
-  // Filter category region hikes by the selected category
-  const categoryRegionHikes = {
-    bariloche: categoryBarilochieHikes.filter(trail => 
-      trail.category === filters.selectedCategory &&
-      (filters.selectedCategory === 'walking-path' || !excludedTrailIds.includes(trail.id))
-    ),
-    pampLinda: categoryPampLindaHikes.filter(trail => 
-      trail.category === filters.selectedCategory
-    )
-  };
-
-  // Debug logs to trace categorization
-  console.log(`Cerro Otto in easy-mountain: ${trails.find(t => t.name === "Cerro Otto & Piedra de Habsburgo")?.category === 'easy-mountain'}`);
-  console.log(`Cerro Campanario in easy-mountain: ${trails.find(t => t.name === "Cerro Campanario")?.category === 'easy-mountain'}`);
-  console.log(`Mirador Lago Gutiérrez in easy-mountain: ${trails.find(t => t.name === "Mirador Lago Gutiérrez")?.category === 'easy-mountain'}`);
-  console.log(`Cerro San Martin in easy-mountain: ${trails.find(t => t.name === "Cerro San Martin")?.category === 'easy-mountain'}`);
-  console.log(`Cerro Llao Llao in easy-mountain: ${trails.find(t => t.name === "Cerro Llao Llao")?.category === 'easy-mountain'}`);
-  console.log(`Category hikes count for ${filters.selectedCategory}: ${categoryHikes.length}`);
-  
-  // Add debug for walking-path specific trails
-  const cascadaTrail = trails.find(t => t.name === "Cascada de los Duendes");
-  const llaoLlaoTrail = trails.find(t => t.name === "Cerro Llao Llao");
-  console.log(`Cascada de los Duendes in walking-path: ${cascadaTrail?.category === 'walking-path'}`);
-  console.log(`Cascada ID: ${cascadaTrail?.id}`);
-  console.log(`Cerro Llao Llao in walking-path: ${llaoLlaoTrail?.category === 'walking-path'}`);
+  const filteredFAQs = useMemo(() => {
+    let filtered = algarveQA;
+    
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(faq => faq.category === selectedCategory);
+    }
+    
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(faq => 
+        faq.question.en.toLowerCase().includes(query) ||
+        faq.question.nl.toLowerCase().includes(query) ||
+        faq.answer.en.toLowerCase().includes(query) ||
+        faq.answer.nl.toLowerCase().includes(query)
+      );
+    }
+    
+    return filtered;
+  }, [selectedCategory, searchQuery]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       <Helmet>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" />
+        <title>{t('title')} - Authentieke Reisgids</title>
+        <meta name="description" content={t('tagline')} />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
       </Helmet>
       
-      {/* Mountain Backdrop Header */}
-      <div className="mountain-backdrop">
-        <div className="relative z-10">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <div className="relative">
           <LanguageSwitcher />
-          <div className="container mx-auto px-4 py-8">
-            <header className="text-center mb-12 animate-fadeIn pt-12 sm:pt-8">
-              <div className="flex justify-center mb-6">
-                <img 
-                  src="/lovable-uploads/18170e0a-a211-46c5-97e6-3a78c27402e0.png"
-                  alt="Camping Los Coihues"
-                  className="h-24 w-auto"
-                />
-              </div>
-              <h1 className="text-4xl font-bold text-forest mb-2">
+          <div className="container mx-auto px-4 py-16">
+            <div className="text-center max-w-4xl mx-auto">
+              <h1 className="text-4xl md:text-6xl font-bold mb-4 pt-16">
                 {t('title')}
               </h1>
-              <p className="text-xl text-stone mb-4">
+              <p className="text-xl md:text-2xl mb-8 opacity-90">
                 {t('tagline')}
               </p>
-            </header>
+              
+              <div className="max-w-2xl mx-auto mb-8">
+                <SearchBar onSearch={setSearchQuery} />
+              </div>
+              
+              <div className="flex flex-wrap justify-center gap-4">
+                <Button 
+                  size="lg"
+                  variant="outline"
+                  className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  onClick={() => window.open('https://booking.com/algarve', '_blank')}
+                >
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  {t('accommodation')}
+                </Button>
+                <Button 
+                  size="lg"
+                  variant="outline"
+                  className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  onClick={() => window.open('https://rentalcars.com/algarve', '_blank')}
+                >
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  {t('transport')}
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      
-      {/* Separator lines */}
-      <div className="separator-container">
-        <div className="separator-line separator-line-1"></div>
-        <div className="separator-line separator-line-2"></div>
-      </div>
 
-      <div className="container mx-auto px-4">
-        <CategoryFilter 
-          selectedCategory={filters.selectedCategory}
-          setSelectedCategory={filters.setSelectedCategory}
-          setFiltersOpen={filters.setFiltersOpen}
-        />
-
-        <FiltersDialog 
-          open={filters.filtersOpen}
-          onOpenChange={filters.setFiltersOpen}
-          selectedType={filters.selectedType}
-          setSelectedType={filters.setSelectedType}
-          selectedDifficulty={filters.selectedDifficulty}
-          setSelectedDifficulty={filters.setSelectedDifficulty}
-          selectedTravelTime={filters.selectedTravelTime}
-          setSelectedTravelTime={filters.setSelectedTravelTime}
-        />
-
-        {shouldShowCategorySection && (
-          <CategorySection 
-            trails={categoryHikes}
-            sectionTitle={t(`category${filters.selectedCategory.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('')}`)}
-            showSection={true}
-            beaches={filters.selectedCategory === 'walking-path' ? filteredBeaches : []}
+      <div className="container mx-auto px-4 py-12">
+        {/* Category Filter */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+            {t('exploreMore')}
+          </h2>
+          <CategoryGrid 
+            selectedCategory={selectedCategory}
+            onCategorySelect={setSelectedCategory}
           />
+        </div>
+
+        {/* Search Results */}
+        {searchQuery && (
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">
+              {t('searchResults')}: "{searchQuery}"
+            </h2>
+          </div>
         )}
 
-        <DayHikesSection 
-          directAccessHikes={directAccessHikes}
-          otherDayHikes={otherDayHikes}
-          showSection={shouldShowDayHikes}
-        />
+        {/* Locations */}
+        {filteredLocations.length > 0 && (
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">
+              {selectedCategory === 'all' ? t('exploreMore') : t(selectedCategory.replace('-', ''))}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredLocations.map((location) => (
+                <AlgarveLocationCard 
+                  key={location.id} 
+                  location={location}
+                />
+              ))}
+            </div>
+          </div>
+        )}
 
-        <MultiDayHikesSection 
-          otherMultiDayHikes={otherMultiDayHikes}
-          pampLindaHikes={pampLindaHikes}
-          showSection={shouldShowMultiDayHikes}
-        />
+        {/* FAQ Section */}
+        {filteredFAQs.length > 0 && (
+          <div className="mb-12">
+            <FAQSection 
+              faqs={filteredFAQs}
+              title={t('faq')}
+            />
+          </div>
+        )}
 
-        <BeachesSection 
-          beaches={filteredBeaches}
-          showSection={shouldShowBeaches}
-        />
+        {/* No Results */}
+        {filteredLocations.length === 0 && filteredFAQs.length === 0 && searchQuery && (
+          <div className="text-center py-12">
+            <p className="text-gray-600 text-lg">{t('noResults')}</p>
+            <Button 
+              className="mt-4"
+              onClick={() => {
+                setSearchQuery('');
+                setSelectedCategory('all');
+              }}
+            >
+              {t('exploreMore')}
+            </Button>
+          </div>
+        )}
+
+        {/* Affiliate Marketing Section */}
+        <div className="bg-blue-50 rounded-lg p-8 text-center">
+          <h3 className="text-2xl font-bold text-gray-800 mb-4">
+            Plan Your Perfect Algarve Trip
+          </h3>
+          <p className="text-gray-600 mb-6">
+            Get the best deals on accommodation, transport, and activities
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button 
+              size="lg"
+              onClick={() => window.open('https://booking.com/algarve', '_blank')}
+            >
+              <ExternalLink className="w-4 h-4 mr-2" />
+              Book Hotels
+            </Button>
+            <Button 
+              size="lg"
+              variant="outline"
+              onClick={() => window.open('https://rentalcars.com/algarve', '_blank')}
+            >
+              <ExternalLink className="w-4 h-4 mr-2" />
+              Rent a Car
+            </Button>
+            <Button 
+              size="lg"
+              variant="outline"
+              onClick={() => window.open('https://getyourguide.com/algarve', '_blank')}
+            >
+              <ExternalLink className="w-4 h-4 mr-2" />
+              Book Tours
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );

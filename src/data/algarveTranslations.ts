@@ -1,0 +1,102 @@
+
+type Translation = {
+  [key: string]: {
+    en: string;
+    nl: string;
+  };
+};
+
+export const algarveTranslations: Translation = {
+  title: {
+    en: "Discover Authentic Algarve",
+    nl: "Ontdek de Authentieke Algarve",
+  },
+  tagline: {
+    en: "Your guide to hidden gems and local experiences",
+    nl: "Jouw gids naar verborgen parels en lokale ervaringen",
+  },
+  searchPlaceholder: {
+    en: "Ask your question about the Algarve...",
+    nl: "Stel je vraag over de Algarve...",
+  },
+  hiddenVillages: {
+    en: "Hidden Villages",
+    nl: "Verborgen Dorpen",
+  },
+  beachesNature: {
+    en: "Beaches & Nature",
+    nl: "Stranden & Natuur",
+  },
+  foodDrink: {
+    en: "Food & Drink",
+    nl: "Eten & Drinken",
+  },
+  transport: {
+    en: "Budget Transport",
+    nl: "Goedkoop Vervoer",
+  },
+  accommodation: {
+    en: "Accommodation",
+    nl: "Accommodatie",
+  },
+  activities: {
+    en: "Activities",
+    nl: "Activiteiten",
+  },
+  budgetTips: {
+    en: "Budget Tips",
+    nl: "Budget Tips",
+  },
+  faq: {
+    en: "Frequently Asked Questions",
+    nl: "Veelgestelde Vragen",
+  },
+  bookNow: {
+    en: "Book Now",
+    nl: "Boek Nu",
+  },
+  findDeals: {
+    en: "Find Best Deals",
+    nl: "Vind Beste Deals",
+  },
+  localTips: {
+    en: "Local Tips",
+    nl: "Lokale Tips",
+  },
+  howToGetThere: {
+    en: "How to Get There",
+    nl: "Hoe Kom Je Er",
+  },
+  highlights: {
+    en: "Highlights",
+    nl: "Hoogtepunten",
+  },
+  budgetFriendly: {
+    en: "Budget Friendly",
+    nl: "Budgetvriendelijk",
+  },
+  readMore: {
+    en: "Read More",
+    nl: "Lees Meer",
+  },
+  showLess: {
+    en: "Show Less",
+    nl: "Toon Minder",
+  },
+  searchResults: {
+    en: "Search Results",
+    nl: "Zoekresultaten",
+  },
+  noResults: {
+    en: "No results found. Try a different search term.",
+    nl: "Geen resultaten gevonden. Probeer andere zoektermen.",
+  },
+  exploreMore: {
+    en: "Explore More",
+    nl: "Ontdek Meer",
+  },
+  relatedQuestions: {
+    en: "Related Questions",
+    nl: "Gerelateerde Vragen",
+  }
+};
