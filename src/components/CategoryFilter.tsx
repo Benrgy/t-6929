@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Badge } from './ui/badge';
-import { Map, Mountain, FootprintsIcon, TreePine, Waves, Filter, Home } from 'lucide-react';
+import { Map, Mountain, FootprintsIcon, TreePine, Waves, Filter } from 'lucide-react';
 import { TrailCategory } from '../types/trail';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -28,17 +28,15 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
         return <FootprintsIcon className="w-4 h-4 mr-1" />;
       case 'beaches-lakes':
         return <Waves className="w-4 h-4 mr-1" />;
-      case 'nearby':
-        return <Home className="w-4 h-4 mr-1" />;
       default:
         return <Map className="w-4 h-4 mr-1" />;
     }
   };
 
   return (
-    <div className="py-4 flex flex-col items-center gap-6">
+    <div className="mb-8 flex flex-col items-center gap-6">
       <div className="w-full max-w-4xl text-center">
-        <p className="text-xl font-semibold text-gray-600 mb-3">{t('category')}</p>
+        <p className="text-xl font-semibold text-gray-600 mb-2">{t('category')}</p>
         <div className="flex flex-wrap justify-center gap-2 items-center">
           <Badge 
             variant={selectedCategory === 'all' ? 'default' : 'outline'}
@@ -55,14 +53,6 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
           >
             <Mountain className="w-4 h-4 mr-1" />
             {t('refugios')}
-          </Badge>
-          <Badge 
-            variant={selectedCategory === 'nearby' ? 'default' : 'outline'}
-            className="cursor-pointer text-base"
-            onClick={() => setSelectedCategory('nearby')}
-          >
-            <Home className="w-4 h-4 mr-1" />
-            {t('nearby')}
           </Badge>
           <Badge 
             variant={selectedCategory === 'easy-mountain' ? 'default' : 'outline'}

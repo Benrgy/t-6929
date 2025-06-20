@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Bus, Car, Footprints, ThumbsUp, Users } from 'lucide-react';
 import { Trail, TransportationType } from '../../types/trail';
@@ -94,113 +95,6 @@ const TransportationInfo: React.FC<TransportationInfoProps> = ({ trail, compact 
           <Car className="w-4 h-4 flex-shrink-0 text-blue-500 mt-0.5" />
           <div>
             <span className="font-bold block">{t('taxiService')} (40 {t('minutes')})</span>
-            {!compact && <span className="text-gray-600">{t('taxiAvailable')}</span>}
-          </div>
-        </div>
-      </div>
-    );
-  }
-  
-  // Special handling for Cerro Llao Llao trail
-  if (trail.id === "2" || trail.name === "Cerro Llao Llao") {
-    return (
-      <div className={compact ? "space-y-2" : "space-y-3 bg-gray-50 p-4 rounded-lg"}>
-        <div className="flex items-start gap-2">
-          <Bus className="w-4 h-4 flex-shrink-0 text-blue-500 mt-0.5" />
-          <div>
-            <span className="font-bold block">{t('busService')} - {trail.busLines}</span>
-            {!compact && <span className="text-gray-600">{t('busLines')}: {trail.busLines}</span>}
-          </div>
-        </div>
-        <div className="flex items-start gap-2">
-          <Car className="w-4 h-4 flex-shrink-0 text-blue-500 mt-0.5" />
-          <div>
-            <span className="font-bold block">{t('taxiService')} (35 {t('minutes')})</span>
-            {!compact && <span className="text-gray-600">{t('taxiAvailable')}</span>}
-          </div>
-        </div>
-      </div>
-    );
-  }
-  
-  // Special handling for the updated trails with specific taxi times
-  if (trail.id === "8" || trail.name === "Cerro Campanario") {
-    return (
-      <div className={compact ? "space-y-2" : "space-y-3 bg-gray-50 p-4 rounded-lg"}>
-        <div className="flex items-start gap-2">
-          <Bus className="w-4 h-4 flex-shrink-0 text-blue-500 mt-0.5" />
-          <div>
-            <span className="font-bold block">{t('busService')} - {trail.busLines}</span>
-            {!compact && <span className="text-gray-600">{t('busLines')}: {trail.busLines}</span>}
-          </div>
-        </div>
-        <div className="flex items-start gap-2">
-          <Car className="w-4 h-4 flex-shrink-0 text-blue-500 mt-0.5" />
-          <div>
-            <span className="font-bold block">{t('taxiService')} (35 {t('minutes')})</span>
-            {!compact && <span className="text-gray-600">{t('taxiAvailable')}</span>}
-          </div>
-        </div>
-      </div>
-    );
-  }
-  
-  if (trail.id === "9" || trail.name === "Circuito Chico - Lago Moreno") {
-    return (
-      <div className={compact ? "space-y-2" : "space-y-3 bg-gray-50 p-4 rounded-lg"}>
-        <div className="flex items-start gap-2">
-          <Bus className="w-4 h-4 flex-shrink-0 text-blue-500 mt-0.5" />
-          <div>
-            <span className="font-bold block">{t('busService')} - {trail.busLines}</span>
-            {!compact && <span className="text-gray-600">{t('busLines')}: {trail.busLines}</span>}
-          </div>
-        </div>
-        <div className="flex items-start gap-2">
-          <Car className="w-4 h-4 flex-shrink-0 text-blue-500 mt-0.5" />
-          <div>
-            <span className="font-bold block">{t('taxiService')} (30 {t('minutes')})</span>
-            {!compact && <span className="text-gray-600">{t('taxiAvailable')}</span>}
-          </div>
-        </div>
-      </div>
-    );
-  }
-  
-  if (trail.id === "10" || trail.name === "Colonia Suiza") {
-    return (
-      <div className={compact ? "space-y-2" : "space-y-3 bg-gray-50 p-4 rounded-lg"}>
-        <div className="flex items-start gap-2">
-          <Bus className="w-4 h-4 flex-shrink-0 text-blue-500 mt-0.5" />
-          <div>
-            <span className="font-bold block">{t('busService')} - {trail.busLines}</span>
-            {!compact && <span className="text-gray-600">{t('busLines')}: {trail.busLines}</span>}
-          </div>
-        </div>
-        <div className="flex items-start gap-2">
-          <Car className="w-4 h-4 flex-shrink-0 text-blue-500 mt-0.5" />
-          <div>
-            <span className="font-bold block">{t('taxiService')} (35 {t('minutes')})</span>
-            {!compact && <span className="text-gray-600">{t('taxiAvailable')}</span>}
-          </div>
-        </div>
-      </div>
-    );
-  }
-  
-  if (trail.id === "21" || trail.name === "Mirador Brazo Tristeza, Lago Escondido & Bahía López") {
-    return (
-      <div className={compact ? "space-y-2" : "space-y-3 bg-gray-50 p-4 rounded-lg"}>
-        <div className="flex items-start gap-2">
-          <Bus className="w-4 h-4 flex-shrink-0 text-blue-500 mt-0.5" />
-          <div>
-            <span className="font-bold block">{t('busService')} - {trail.busLines}</span>
-            {!compact && <span className="text-gray-600">{t('busLines')}: {trail.busLines}</span>}
-          </div>
-        </div>
-        <div className="flex items-start gap-2">
-          <Car className="w-4 h-4 flex-shrink-0 text-blue-500 mt-0.5" />
-          <div>
-            <span className="font-bold block">{t('taxiService')} (35 {t('minutes')})</span>
             {!compact && <span className="text-gray-600">{t('taxiAvailable')}</span>}
           </div>
         </div>

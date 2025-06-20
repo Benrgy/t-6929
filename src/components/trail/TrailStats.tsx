@@ -35,10 +35,6 @@ const TrailStats: React.FC<TrailStatsProps> = ({
       return language === 'es' ? `3 horas ${oneWayText}` : `3 ${t('hours')} ${oneWayText}`;
     }
     
-    if (trail.name === "Refugio Laguna Negra desde Colonia Suiza") {
-      return language === 'es' ? `3 horas ${oneWayText}` : `3 ${t('hours')} ${oneWayText}`;
-    }
-    
     if (trail.name.includes("Jakob")) {
       return language === 'es' ? `5-6 horas ${oneWayText}` : `5-6 ${t('hours')} ${oneWayText}`;
     }

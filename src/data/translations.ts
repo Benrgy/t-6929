@@ -210,10 +210,6 @@ export const translations: Translation = {
     en: "Check schedules at the bus terminal or ask at reception",
     es: "Consulta los horarios en la terminal o pregunta en recepción",
   },
-  nearby: {
-    en: "Nearby",
-    es: "Cerca",
-  },
   highlightAlpineLake: {
     en: "Alpine lake",
     es: "Lago alpino",

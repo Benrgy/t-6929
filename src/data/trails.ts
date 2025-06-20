@@ -1,4 +1,3 @@
-
 import { Trail } from '../types/trail';
 
 export const trails: Trail[] = [
@@ -44,7 +43,7 @@ export const trails: Trail[] = [
     transportation: ["bus", "taxi"],
     distanceFromCampsite: 12,
     travelTime: 50,
-    busLines: "Linea 50 (desde Coihues) conectando con Línea 20 (Av. Bustillo) (50 min)",
+    busLines: "Linea 50 (Desde Coihues) conectando Linea 20 (Av. Bustillo) (50 min)",
     category: "easy-mountain"
   },
   {
@@ -58,7 +57,7 @@ export const trails: Trail[] = [
     elevationGain: 676,
     requiresReservation: true,
     description: {
-      en: "We recommend taking an Uber from Camping to the base of Cerro Catedral. The trip takes approximately 15 minutes. Buses often involve a long wait. This trail starts at a higher point than the one from Lake Gutiérrez, saving about 1 hour of hiking. From the base of Cerro Catedral, you can begin your ascent to Refugio Frey, enjoying spectacular views as you progress through the mountainous landscape.\n\nFrom the Refugio Frey area, the trail skirts Laguna Toncek to the south, towards the ascent to Laguna Schmoll. This rocky slope is well marked and follows some twists and turns along the stream that descends from Schmoll to Toncek. This climb is significant and has many steps between rocks.\n\nEfforts have been made to protect the lagoon's wetland (mallín). A stone path was built to cross the wetland along a delineated trail without increasing erosion. Please use it carefully and stay on the marked path.\nFrom Laguna Schmoll begins another important step. This section has slightly larger rocks to climb and ends in the \"soccer field\". A few steps later, you reach the edge of Cerro Catedral with panoramic views of the Rucaco valley and Cerro Tronador in the background.\n\nThe descent down the Cathedral slope to the valley must be done with great care. At first, each step is like a large step, and then begins a section of loose stones and sand where your foot sinks and slides.\nAfter four hours of leaving Frey, stepping on firm ground in the forest along the valley's contour is a relief. Shade, water, shelter, rest.\n\nLeaving the Rucaco forest behind is like closing a storybook. Upon leaving the wooded area, you leave the protection from sun and wind, and the trail begins to climb with increasing slope. This is the ascent to Black Breach, and from its edge begins another particular descent.\n\nWith the same care as the previous descent, paying attention to each step and taking into account the paint signals, you re-enter a forest of lengas and then cross the stream that naces in Laguna Jakob. Add four more hours to the journey.\n\nFrom the Jakob area, the Laguna de los Témpanos is only 40 minutes away.\n\nReturning from Laguna Jakob, skirting the Casa de Piedra stream to Tambo Báez near Colonia Suiza usually takes 5 hours.\n\nHours: 6-8 hours.",
+      en: "We recommend taking an Uber from Camping to the base of Cerro Catedral. The trip takes approximately 15 minutes. Buses often involve a long wait. This trail starts at a higher point than the one from Lake Gutiérrez, saving about 1 hour of hiking. From the base of Cerro Catedral, you can begin your ascent to Refugio Frey, enjoying spectacular views as you progress through the mountainous landscape.\n\nFrom the Refugio Frey area, the trail skirts Laguna Toncek to the south, towards the ascent to Laguna Schmoll. This rocky slope is well marked and follows some twists and turns along the stream that descends from Schmoll to Toncek. This climb is significant and has many steps between rocks.\n\nEfforts have been made to protect the lagoon's wetland (mallín). A stone path was built to cross the wetland along a delineated trail without increasing erosion. Please use it carefully and stay on the marked path.\nFrom Laguna Schmoll begins another important step. This section has slightly larger rocks to climb and ends in the \"soccer field\". A few steps later, you reach the edge of Cerro Catedral with panoramic views of the Rucaco valley and Cerro Tronador in the background.\n\nThe descent down the Cathedral slope to the valley must be done with great care. At first, each step is like a large step, and then begins a section of loose stones and sand where your foot sinks and slides.\nAfter four hours of leaving Frey, stepping on firm ground in the forest along the valley's contour is a relief. Shade, water, shelter, rest.\n\nLeaving the Rucaco forest behind is like closing a storybook. Upon leaving the wooded area, you leave the protection from sun and wind, and the trail begins to climb with increasing slope. This is the ascent to Black Breach, and from its edge begins another particular descent.\n\nWith the same care as the previous descent, paying attention to each step and taking into account the paint signals, you re-enter a forest of lengas and then cross the stream that originates in Laguna Jakob. Add four more hours to the journey.\n\nFrom the Jakob area, the Laguna de los Témpanos is only 40 minutes away.\n\nReturning from Laguna Jakob, skirting the Casa de Piedra stream to Tambo Báez near Colonia Suiza usually takes 5 hours.\n\nHours: 6-8 hours.",
       es: "Recomendamos tomarse un Uber desde el Camping hasta la base del Cerro Catedral. El viaje dura aproximadamente 15 minutos. Los buses muchas veces presentan una gran espera. Este sendero comienza en un punto más alto que el que parte desde el Lago Gutiérrez, lo que permite ahorrar alrededor de 1 hora de caminata. Desde la base del Cerro Catedral, podrás iniciar el ascenso al Refugio Frey, disfrutando de vistas espectaculares mientras avanzas a través del paisaje montañoso.\n\nDesde la zona del refugio Frey, se bordea la laguna Toncek hacia el sur, hacia la subida de la laguna Schmoll. Esta pendiente de rocas está bien señalizada y sigue con algunas idas y vueltas el arroyo que baja desde Schmoll a Toncek. Esta subida es importante y tiene muchos escalones entre rocas.\n\nDesde hace un tiempo se está trabajando en proteger el humedal (mallín) de la laguna. Para eso se hizo un trayecto de piedras para atravesar el humedal por un sendero delineado sin aumentar la erosión. Por favor usálo prestando atención a no desviarte.\nDesde laguna Schmoll comienza otro escalón importante. Este sector tiene rocas un poco más grandes para trepar y finaliza en \"cancha de fútbol\". Unos pocos pasos después se llega al filo del cerro Catedral con vistas panorámicas hacia el valle del Rucaco y de fondo el cerro Tronador.\n\nLa bajada por la ladera del Catedral hacia el valle debe hacerse con mucho cuidado. Al principio cada paso es como un gran escalón y después empieza una parte de piedras y arena suelta donde el pie se hunde y se desliza.\nDespués de cuatro horas de haber salido del Frey, pisar el suelo firme en el bosque sobre el contorno del valle es un respiro. Sombra, agua, resguardo, descanso.\n\nDejar el bosque del Rucaco atrás significa cerrar un libro de cuentos. Al salir de la zona boscosa se deja la protección del sol y del viento y el sendero empieza a subir cada vez con más pendiente. Se trata de la subida a Brecha Negra y desde su filo comienza otra bajada algo particular.\n\nCon los mismos cuidados que el descenso anterior, prestando atención a cada paso y teniendo en cuenta las señales de pintura, se vuelve a entrar en un bosque de lengas y después se cruza el arroyo que nace en la laguna Jakob. Sumale cuatro horas más al recorrido.\n\nDesde la zona de Jakob, a sólo 40 minutos está la laguna de los Témpanos.\n\nRegresar desde laguna Jakob, bordeando el arroyo Casa de Piedra hasta el Tambo Báez cerca de Colonia Suiza suele hacerse en 5 horas.\n\nHoras: 6-8 horas."
     },
     imageUrl: "/lovable-uploads/3b45435b-d0d0-4fb7-ac3b-73c18e21fd50.png",
@@ -179,7 +178,7 @@ export const trails: Trail[] = [
     transportation: ["bus", "taxi"],
     distanceFromCampsite: 10,
     travelTime: 25,
-    busLines: "Línea 50 (desde Coihues) + Línea 20 (Av. Bustillo) (40 min)",
+    busLines: "Linea 50 (desde Coihues) + Linea 20 (Av. Bustillo) (40 min)",
     category: "easy-mountain"
   },
   {
@@ -202,7 +201,7 @@ export const trails: Trail[] = [
     transportation: ["bus", "taxi"],
     distanceFromCampsite: 15,
     travelTime: 35,
-    busLines: "Línea 50 (desde Coihues) + Línea 10 ó 13 (Av. Bustillo) (50 min)",
+    busLines: "Linea 50 (desde Coihues) + Linea 10 ó 13 (Av. Bustillo) (50 min)",
     category: "walking-path"
   },
   {
@@ -224,8 +223,8 @@ export const trails: Trail[] = [
     highlights: ["highlightHistoricSettlement", "highlightArtisanMarket", "highlightLocalCuisine", "highlightLakeAccess"],
     transportation: ["bus", "taxi"],
     distanceFromCampsite: 12,
-    travelTime: 35,
-    busLines: "Línea 50 (desde Coihues hasta Rotonda Av. Pioneros) + Línea 10 (desde Av. Bustillo km 8) (50 min)",
+    travelTime: 30,
+    busLines: "Linea 50 (desde Coihues hasta Rotonda Av. Pioneros) + Linea 10 (desde Av. Bustillo km 8) (50 min)",
     category: "walking-path"
   },
   {
@@ -239,8 +238,8 @@ export const trails: Trail[] = [
     elevationGain: 450,
     requiresReservation: false,
     description: {
-      en: "The trail starts by going up Calle Balcón Gútierrez until the end. There you'll reach the Ecological Camping and need to continue walking 30 meters to the left where you'll find the beginning of the trail on your right. It's steep but can be climbed quickly.",
-      es: "El inicio del sendero esta subiendo la Calle Balcón Gútierrez hasta al fondo. Ahí te chocas con el Camping Ecologico y tienes que seguir caminando 30 m a la izquierda donde vas a encontrar el inicio del sendero de mano derecha. Es empinado pero se sube rápido."
+      en: "The trail starts by going up Calle Balcón Lopez until the end. There you'll reach the Ecological Camping and need to continue walking 30 meters to the left where you'll find the beginning of the trail on your right. It's steep but can be climbed quickly.",
+      es: "El inicio del sendero esta subiendo la Calle Balcón Lopez hasta al fondo. Ahí te chocas con el Camping Ecologico y tienes que seguir caminando 30 m a la izquierda donde vas a encontrar el inicio del sendero de mano derecha. Es empinado pero se sube rápido."
     },
     imageUrl: "/lovable-uploads/5e7df03e-d176-4498-a3f7-bc5afac27381.png",
     startingPoint: "Camping Los Coihues",
@@ -278,7 +277,7 @@ export const trails: Trail[] = [
     type: "multi-day",
     difficulty: "hard",
     distance: 11,
-    duration: 3,
+    duration: 5,
     elevation: 1640,
     elevationGain: 913,
     requiresReservation: true,
@@ -409,7 +408,7 @@ export const trails: Trail[] = [
     transportation: ["bus", "taxi"],
     distanceFromCampsite: 18,
     travelTime: 30,
-    busLines: "Linea 50 (desde Los Coihues hasta Rotonda Av. Pioneros) + Linea 10 ó 13 (Av. Bustillo km 8) (50 min)",
+    busLines: "Linea 50 (desde Los Coihues hasta Rotonda Av. Pioneros) + Linea 10 o 13 (Av. Bustillo km 8) (50 min)",
     category: "high-mountain",
     region: "bariloche"
   },
@@ -419,7 +418,7 @@ export const trails: Trail[] = [
     type: "multi-day",
     difficulty: "expert",
     distance: 25,
-    duration: 7,
+    duration: 11,
     elevation: 2056,
     elevationGain: 500,
     requiresReservation: true,
@@ -458,30 +457,6 @@ export const trails: Trail[] = [
     distanceFromCampsite: 0,
     travelTime: 15,
     category: "high-mountain",
-    region: "bariloche"
-  },
-  {
-    id: "21",
-    name: "Mirador Brazo Tristeza, Lago Escondido & Bahía López",
-    type: "day-hike",
-    difficulty: "easy",
-    distance: 2,
-    duration: 0.67,
-    elevation: 850,
-    elevationGain: 95,
-    requiresReservation: false,
-    description: {
-      en: "The trail starts from the Bahía López parking lot (Km 32 of the \"Circuito Chico\") located next to the Hotel Alun Nehuen, belonging to the Luz y Fuerza Union. The entire path runs through the forest and has a gentle slope. After walking for about 40 minutes, you reach a natural promontory from which you can see the Tristeza Arm of Lake Nahuel Huapi and Cerro Capilla. At the viewpoint, stay away from the cliff area and pay special attention to children. Return to the starting point by the same trail.",
-      es: "El sendero parte desde el estacionamiento de Bahía López (Km 32 del \"Circuito Chico\") ubicado junto al Hotel Alun Nehuen, perteneciente al Sindicato de Luz y Fuerza. Todo el camino transita por el bosque y presenta una leve pendiente. Después de caminar unos 40 minutos, se llega a un promontorio natural desde el cual se observa el Brazo Tristeza del Lago Nahuel Huapi y el Cerro Capilla. En el mirador, hay que mantenerse alejados de la zona de acantilado y prestar especial atención a los niños. Se regresa al lugar de inicio por el mismo sendero."
-    },
-    imageUrl: "/lovable-uploads/57c8b30f-1d60-4eda-b748-834262a3a463.png",
-    startingPoint: "Bahía López parking lot (40 min drive from Los Coihues)",
-    highlights: ["highlightPanoramicViews", "highlightLakeViews", "highlightFamilyFriendly", "highlightEasyAccess"],
-    transportation: ["bus", "taxi"],
-    distanceFromCampsite: 22,
-    travelTime: 35,
-    busLines: "Línea 50 (Desde Coihues) hasta Av. Pioneros y Rotonda + Línea 10 hasta Playa López (50 min)",
-    category: "walking-path",
     region: "bariloche"
   }
 ];

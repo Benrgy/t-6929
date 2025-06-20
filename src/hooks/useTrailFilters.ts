@@ -22,8 +22,7 @@ export const useTrailFilters = (trails: Trail[], beaches: Beach[]) => {
     const typeMatch = selectedType === 'all' || trail.type === selectedType;
     const difficultyMatch = selectedDifficulty === 'all' || trail.difficulty === selectedDifficulty;
     const accessibilityMatch = selectedTravelTime === 'all' || getAccessibilityCategory(trail) === selectedTravelTime;
-    const categoryMatch = selectedCategory === 'all' || trail.category === selectedCategory || 
-      (selectedCategory === 'nearby' && trail.distanceFromCampsite <= 1);
+    const categoryMatch = selectedCategory === 'all' || trail.category === selectedCategory;
     return typeMatch && difficultyMatch && accessibilityMatch && categoryMatch;
   });
 
