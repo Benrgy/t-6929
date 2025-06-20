@@ -1,34 +1,36 @@
 
-import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import { LanguageProvider, useLanguage } from "./context/LanguageContext";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Homepage from "./pages/Homepage";
+import VerborgenDorpen from "./pages/VerborgenDorpen";
+import StrandenNatuur from "./pages/StrandenNatuur";
+import EtenDrinken from "./pages/EtenDrinken";
+import VervoerTips from "./pages/VervoerTips";
+import FAQ from "./pages/FAQ";
+import Contact from "./pages/Contact";
 import "./App.css";
-
-// Language wrapper component to handle URL parameters
-const LanguageWrapper = ({ language }: { language: 'en' | 'es' }) => {
-  const { setLanguage } = useLanguage();
-  
-  useEffect(() => {
-    setLanguage(language);
-  }, [language, setLanguage]);
-  
-  return <Index />;
-};
 
 function App() {
   return (
-    <LanguageProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Navigate to="/es" replace />} />
-          <Route path="/en" element={<LanguageWrapper language="en" />} />
-          <Route path="/es" element={<LanguageWrapper language="es" />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
-    </LanguageProvider>
+    <Router>
+      <div className="min-h-screen bg-gradient-to-b from-orange-50 to-blue-50">
+        <Navbar />
+        <main>
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/verborgen-dorpen" element={<VerborgenDorpen />} />
+            <Route path="/stranden-natuur" element={<StrandenNatuur />} />
+            <Route path="/eten-drinken" element={<EtenDrinken />} />
+            <Route path="/vervoer-tips" element={<VervoerTips />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
