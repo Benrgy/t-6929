@@ -19,36 +19,38 @@ const TrailStats: React.FC<TrailStatsProps> = ({
 
   const formatDistance = (trail: Trail) => {
     if (trail.name === "Lago Gutiérrez") {
-      return `${trail.distance * 1000} ${t('meters')}`;
+      return `${trail.distance * 1000} ${t('meters') || 'meters'}`;
     }
-    return `${trail.distance} ${t('km')}`;
+    return `${trail.distance} ${t('km') || 'km'}`;
   };
 
   const formatDuration = (trail: Trail) => {
-    const oneWayText = language === 'es' ? "ida" : "one way";
+    const oneWayText = language === 'nl' ? "enkele reis" : "one way";
     
     if (trail.name === "Cerro Otto & Piedra de Habsburgo") {
-      return language === 'es' ? "2 horas ida" : "2 hours one way";
+      return language === 'nl' ? "2 uur enkele reis" : "2 hours one way";
     }
     
     if (trail.name === "Refugio Frey from Villa Catedral") {
-      return language === 'es' ? `3 horas ${oneWayText}` : `3 ${t('hours')} ${oneWayText}`;
+      return language === 'nl' ? `3 uur ${oneWayText}` : `3 hours ${oneWayText}`;
     }
     
     if (trail.name.includes("Jakob")) {
-      return language === 'es' ? `5-6 horas ${oneWayText}` : `5-6 ${t('hours')} ${oneWayText}`;
+      return language === 'nl' ? `5-6 uur ${oneWayText}` : `5-6 hours ${oneWayText}`;
     }
     
     if (trail.name === "Lago Gutiérrez" || trail.name === "Cascada de los Duendes" || 
         (trail.name === "Cerro Campanario" && trail.duration === 0.75)) {
-      return `${Math.round(trail.duration * 60)} ${t('minutes')} ${oneWayText}`;
+      const minutesText = language === 'nl' ? 'minuten' : 'minutes';
+      return `${Math.round(trail.duration * 60)} ${minutesText} ${oneWayText}`;
     }
 
-    if (language === 'es') {
-      return `${trail.duration} ${trail.duration === 1 ? 'hora' : 'horas'} ${oneWayText}`;
+    if (language === 'nl') {
+      return `${trail.duration} ${trail.duration === 1 ? 'uur' : 'uur'} ${oneWayText}`;
     }
     
-    return `${trail.duration} ${t('hours')} ${oneWayText}`;
+    const hoursText = t('hours') || 'hours';
+    return `${trail.duration} ${hoursText} ${oneWayText}`;
   };
 
   const getElevation = (trail: Trail) => {
