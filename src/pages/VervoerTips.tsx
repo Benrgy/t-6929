@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Car, Bus, Bike, Wallet, Clock, MapPin } from 'lucide-react';
+import { Car, Bus, Bike, Wallet, Clock, MapPin, Utensils } from 'lucide-react';
 
 const VervoerTips = () => {
   return (
