@@ -12,12 +12,12 @@ export const algarveTranslations: Translation = {
     nl: "Ontdek de Authentieke Algarve",
   },
   tagline: {
-    en: "Your guide to hidden gems and local experiences",
-    nl: "Jouw gids naar verborgen parels en lokale ervaringen",
+    en: "Your guide to hidden gems and local experiences away from the crowds",
+    nl: "Jouw gids naar verborgen parels en lokale ervaringen, weg van de drukte",
   },
   searchPlaceholder: {
-    en: "Ask your question about the Algarve...",
-    nl: "Stel je vraag over de Algarve...",
+    en: "Search for places, tips, or ask a question...",
+    nl: "Zoek naar plekken, tips, of stel een vraag...",
   },
   hiddenVillages: {
     en: "Hidden Villages",
@@ -32,16 +32,16 @@ export const algarveTranslations: Translation = {
     nl: "Eten & Drinken",
   },
   transport: {
-    en: "Budget Transport",
-    nl: "Goedkoop Vervoer",
+    en: "Transport & Practical",
+    nl: "Vervoer & Praktisch",
   },
   accommodation: {
     en: "Accommodation",
     nl: "Accommodatie",
   },
   activities: {
-    en: "Activities",
-    nl: "Activiteiten",
+    en: "Activities & Tours",
+    nl: "Activiteiten & Tours",
   },
   budgetTips: {
     en: "Budget Tips",
@@ -88,8 +88,8 @@ export const algarveTranslations: Translation = {
     nl: "Zoekresultaten",
   },
   noResults: {
-    en: "No results found. Try a different search term.",
-    nl: "Geen resultaten gevonden. Probeer andere zoektermen.",
+    en: "No results found. Try a different search term or explore our categories.",
+    nl: "Geen resultaten gevonden. Probeer andere zoektermen of bekijk onze categorieën.",
   },
   exploreMore: {
     en: "Explore More",
@@ -98,5 +98,25 @@ export const algarveTranslations: Translation = {
   relatedQuestions: {
     en: "Related Questions",
     nl: "Gerelateerde Vragen",
+  },
+  blog: {
+    en: "Blog & News",
+    nl: "Blog & Nieuws",
+  },
+  contact: {
+    en: "Contact",
+    nl: "Contact",
+  },
+  newsletter: {
+    en: "Newsletter",
+    nl: "Nieuwsbrief",
+  },
+  privacy: {
+    en: "Privacy Policy",
+    nl: "Privacy Beleid",
+  },
+  terms: {
+    en: "Terms of Service",
+    nl: "Voorwaarden",
   }
 };
