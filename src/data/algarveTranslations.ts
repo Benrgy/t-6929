@@ -1,4 +1,3 @@
-
 type Translation = {
   [key: string]: {
     en: string;
@@ -17,7 +16,7 @@ export const algarveTranslations: Translation = {
   },
   searchPlaceholder: {
     en: "Search for places, tips, or ask a question...",
-    nl: "Zoek naar plekken, tips, of stel een vraag...",
+    nl: "Search naar plekken, tips, of stel een vraag...",
   },
   hiddenVillages: {
     en: "Hidden Villages",
@@ -118,5 +117,13 @@ export const algarveTranslations: Translation = {
   terms: {
     en: "Terms of Service",
     nl: "Voorwaarden",
+  },
+  description: {
+    en: "Description",
+    nl: "Beschrijving",
+  },
+  travelTime: {
+    en: "Travel Time",
+    nl: "Reistijd",
   }
 };
