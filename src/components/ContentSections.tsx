@@ -6,14 +6,14 @@ import LocationCard from './LocationCard';
 import FAQSection from './FAQSection';
 import { Button } from './ui/button';
 import { ContentCategory, AlgarveLocation } from '../types/algarve';
-import { AlgarveQA } from '../types/algarve';
+import { FAQ } from '../types/algarve';
 
 interface ContentSectionsProps {
   selectedCategory: ContentCategory | 'all';
   onCategorySelect: (category: ContentCategory | 'all') => void;
   searchQuery: string;
   filteredLocations: AlgarveLocation[];
-  filteredFAQs: AlgarveQA[];
+  filteredFAQs: FAQ[];
   searchFilters: any;
   onClearSearch: () => void;
 }

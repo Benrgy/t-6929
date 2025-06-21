@@ -69,11 +69,11 @@ const EnhancedLocationDetail: React.FC<EnhancedLocationDetailProps> = ({ locatio
             <div className="text-right">
               <div className="flex items-center gap-1 mb-1">
                 <Euro className="w-4 h-4 text-green-600" />
-                <span className="font-semibold">€{location.averageCost}</span>
+                <span className="font-semibold">{location.accessInfo.cost}</span>
               </div>
               <div className="flex items-center gap-1">
                 <Clock className="w-4 h-4 text-blue-600" />
-                <span className="text-sm">{location.duration}</span>
+                <span className="text-sm">{location.accessInfo.duration}</span>
               </div>
             </div>
           </div>
@@ -152,14 +152,34 @@ const EnhancedLocationDetail: React.FC<EnhancedLocationDetailProps> = ({ locatio
             <TabsContent value="booking" className="space-y-4">
               <h3 className="font-semibold">{language === 'nl' ? 'Boek je Verblijf' : 'Book Your Stay'}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {location.affiliateLinks?.map((link, index) => (
-                  <Button key={index} variant="outline" className="justify-between" asChild>
-                    <a href={link.url} target="_blank" rel="noopener noreferrer">
-                      <span>{link.platform}</span>
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  </Button>
-                ))}
+                {location.affiliateLinks && (
+                  <>
+                    {location.affiliateLinks.accommodation && (
+                      <Button variant="outline" className="justify-between" asChild>
+                        <a href={location.affiliateLinks.accommodation} target="_blank" rel="noopener noreferrer">
+                          <span>{language === 'nl' ? 'Accommodatie' : 'Accommodation'}</span>
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      </Button>
+                    )}
+                    {location.affiliateLinks.transport && (
+                      <Button variant="outline" className="justify-between" asChild>
+                        <a href={location.affiliateLinks.transport} target="_blank" rel="noopener noreferrer">
+                          <span>{language === 'nl' ? 'Vervoer' : 'Transport'}</span>
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      </Button>
+                    )}
+                    {location.affiliateLinks.activities && (
+                      <Button variant="outline" className="justify-between" asChild>
+                        <a href={location.affiliateLinks.activities} target="_blank" rel="noopener noreferrer">
+                          <span>{language === 'nl' ? 'Activiteiten' : 'Activities'}</span>
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      </Button>
+                    )}
+                  </>
+                )}
               </div>
             </TabsContent>
           </Tabs>
