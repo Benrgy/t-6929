@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import LanguageSwitcher from '../components/LanguageSwitcher';
@@ -10,6 +9,9 @@ import NewsletterSection from '../components/NewsletterSection';
 import ContactSection from '../components/ContactSection';
 import BlogSection from '../components/BlogSection';
 import UserTipsSection from '../components/UserTipsSection';
+import TestimonialsSection from '../components/TestimonialsSection';
+import BackToTop from '../components/BackToTop';
+import StatsSection from '../components/StatsSection';
 import { ContentCategory } from '../types/algarve';
 import { algarveLocations } from '../data/algarveLocations';
 import { algarveQA } from '../data/algarveQA';
@@ -131,6 +133,9 @@ const Index = () => {
         onSearchChange={setSearchQuery}
       />
 
+      {/* Stats Section */}
+      <StatsSection />
+
       <div className="container mx-auto px-4 py-16">
         {/* Category Filter */}
         <div className="mb-16">
@@ -215,6 +220,9 @@ const Index = () => {
         <ContactSection />
       </div>
 
+      {/* Testimonials Section */}
+      <TestimonialsSection />
+
       {/* User Tips Section */}
       <UserTipsSection />
 
@@ -222,6 +230,9 @@ const Index = () => {
       <div id="blog">
         <BlogSection />
       </div>
+
+      {/* Back to Top Button */}
+      <BackToTop />
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-16">
