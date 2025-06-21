@@ -6,6 +6,7 @@ import HeroSection from '../components/HeroSection';
 import StatsSection from '../components/StatsSection';
 import AdvancedSearchBar from '../components/AdvancedSearchBar';
 import ContentSections from '../components/ContentSections';
+import ComprehensiveFAQ from '../components/ComprehensiveFAQ';
 import EventsCalendar from '../components/EventsCalendar';
 import PageSections from '../components/PageSections';
 import FooterSection from '../components/FooterSection';
@@ -103,17 +104,17 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Helmet>
-        <title>{language === 'nl' ? 'Lokaal Genieten in de Algarve - Jouw Authentieke Reisgids' : 'Local Algarve Experience - Your Authentic Travel Guide'}</title>
+        <title>{language === 'nl' ? 'Lokaal Genieten in de Algarve - Jouw Authentieke Reisgids voor Budgetvriendelijk Reizen' : 'Local Algarve Experience - Your Authentic Budget Travel Guide'}</title>
         <meta name="description" content={language === 'nl' ? 
-          'Ontdek de echte Algarve zoals een local. Budgetvriendelijke tips, verborgen parels en authentieke ervaringen weg van het massatoerisme.' :
-          'Discover the real Algarve like a local. Budget-friendly tips, hidden gems and authentic experiences away from mass tourism.'} />
+          'Ontdek de echte Algarve zoals een local. Budgetvriendelijke tips, verborgen parels, dorpen zonder toeristen en authentieke ervaringen. Inclusief budgetcalculator en lokale geheimen.' :
+          'Discover the real Algarve like a local. Budget-friendly tips, hidden gems, villages without tourists and authentic experiences. Including budget calculator and local secrets.'} />
         <meta name="keywords" content={language === 'nl' ? 
-          'Algarve local tips, verborgen dorven, goedkoop reizen Portugal, authentiek, budget, geheime stranden, lokale markten' : 
-          'Algarve local tips, hidden villages, budget travel Portugal, authentic, secret beaches, local markets'} />
+          'Algarve lokale tips, verborgen dorven Portugal, goedkoop reizen Algarve, authentiek, budget, geheime stranden, lokale markten, Alte, Monsaraz, Cacela Velha, budgetcalculator' : 
+          'Algarve local tips, hidden villages Portugal, budget travel Algarve, authentic, secret beaches, local markets, Alte, Monsaraz, Cacela Velha, budget calculator'} />
         <meta property="og:title" content={`${language === 'nl' ? 'Lokaal Genieten in de Algarve' : 'Local Algarve Experience'} - ${language === 'nl' ? 'Authentieke Reisgids' : 'Authentic Travel Guide'}`} />
         <meta property="og:description" content={language === 'nl' ? 
-          'Jouw gids naar verborgen parels en lokale ervaringen, weg van de drukte' :
-          'Your guide to hidden gems and local experiences away from the crowds'} />
+          'Jouw gids naar verborgen parels en lokale ervaringen, weg van de drukte. Met budgetcalculator en insider tips.' :
+          'Your guide to hidden gems and local experiences away from the crowds. With budget calculator and insider tips.'} />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://yourdomain.com/" />
       </Helmet>
@@ -141,6 +142,11 @@ const Index = () => {
             className="max-w-4xl mx-auto"
           />
         </div>
+      </div>
+
+      {/* Comprehensive FAQ Section */}
+      <div id="faq">
+        <ComprehensiveFAQ />
       </div>
 
       {/* Events Calendar */}
