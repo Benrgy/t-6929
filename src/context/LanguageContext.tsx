@@ -10,11 +10,7 @@ interface LanguageContextType {
   t: (key: string) => string;
 }
 
-export const LanguageContext = createContext<LanguageContextType>({
-  language: 'nl',
-  setLanguage: () => {},
-  t: (key: string) => key
-});
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [language, setLanguage] = useState<Language>('nl');
@@ -24,8 +20,14 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     return algarveTranslations[key]?.[language] || key;
   };
 
+  const value = {
+    language,
+    setLanguage,
+    t
+  };
+
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   );
