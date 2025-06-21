@@ -20,31 +20,51 @@ export default {
     },
     extend: {
       colors: {
+        // Aangepaste Nederlandse Algarve kleuren
+        primary: {
+          50: "#f0f9f4",
+          100: "#dcf2e7", 
+          200: "#bbe5d0",
+          300: "#8dd2b0",
+          400: "#58b889",
+          500: "#2A6B3F", // Hoofdkleur natuur groen
+          600: "#1f5d35",
+          700: "#1a4d2c",
+          800: "#154025",
+          900: "#11351e",
+          950: "#081d10",
+        },
+        secondary: {
+          50: "#fff7ed",
+          100: "#ffedd5",
+          200: "#fed7aa",
+          300: "#fdba74",
+          400: "#fb923c",
+          500: "#E07A5F", // Hoofdkleur zon oranje
+          600: "#dc6847",
+          700: "#c2533d",
+          800: "#9c4536",
+          900: "#7c3a2e",
+          950: "#431a14",
+        },
+        accent: {
+          50: "#fefcf3",
+          100: "#fef9e7",
+          200: "#fef2ca",
+          300: "#fde8a7",
+          400: "#fbda74",
+          500: "#F4F1DE", // Hoofdkleur strand beige
+          600: "#f0e8b8",
+          700: "#e8d993",
+          800: "#dcca6e",
+          900: "#d4bc4a",
+          950: "#786a26",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        forest: {
-          DEFAULT: "#2D5A27",
-          light: "#3B7A36",
-        },
-        stone: {
-          DEFAULT: "#6B7280",
-          light: "#9CA3AF",
-        },
-        sky: {
-          DEFAULT: "#E0F2FE",
-          dark: "#BAE6FD",
-        },
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
@@ -52,10 +72,6 @@ export default {
         muted: {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
@@ -66,24 +82,27 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
       },
-      keyframes: {
-        fadeIn: {
-          "0%": { opacity: "0", transform: "translateY(10px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-        slideIn: {
-          "0%": { transform: "translateX(-100%)" },
-          "100%": { transform: "translateX(0)" },
-        },
-      },
-      animation: {
-        fadeIn: "fadeIn 0.5s ease-out",
-        slideIn: "slideIn 0.3s ease-out",
-      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      fontFamily: {
+        sans: ["Open Sans", "system-ui", "sans-serif"],
       },
     },
   },

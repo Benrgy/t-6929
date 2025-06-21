@@ -6,6 +6,7 @@ import HeroSection from '../components/HeroSection';
 import StatsSection from '../components/StatsSection';
 import AdvancedSearchBar from '../components/AdvancedSearchBar';
 import ContentSections from '../components/ContentSections';
+import EventsCalendar from '../components/EventsCalendar';
 import PageSections from '../components/PageSections';
 import FooterSection from '../components/FooterSection';
 import BackToTop from '../components/BackToTop';
@@ -102,13 +103,17 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Helmet>
-        <title>{t('title')} - {language === 'nl' ? 'Authentieke Reisgids' : 'Authentic Travel Guide'}</title>
-        <meta name="description" content={t('tagline')} />
+        <title>{language === 'nl' ? 'Lokaal Genieten in de Algarve - Jouw Authentieke Reisgids' : 'Local Algarve Experience - Your Authentic Travel Guide'}</title>
+        <meta name="description" content={language === 'nl' ? 
+          'Ontdek de echte Algarve zoals een local. Budgetvriendelijke tips, verborgen parels en authentieke ervaringen weg van het massatoerisme.' :
+          'Discover the real Algarve like a local. Budget-friendly tips, hidden gems and authentic experiences away from mass tourism.'} />
         <meta name="keywords" content={language === 'nl' ? 
-          'Algarve, Portugal, verborgen dorven, lokale tips, authentiek reizen, goedkoop, budget, geheime stranden' : 
-          'Algarve, Portugal, hidden villages, local tips, authentic travel, budget, secret beaches'} />
-        <meta property="og:title" content={`${t('title')} - ${language === 'nl' ? 'Authentieke Reisgids' : 'Authentic Travel Guide'}`} />
-        <meta property="og:description" content={t('tagline')} />
+          'Algarve local tips, verborgen dorven, goedkoop reizen Portugal, authentiek, budget, geheime stranden, lokale markten' : 
+          'Algarve local tips, hidden villages, budget travel Portugal, authentic, secret beaches, local markets'} />
+        <meta property="og:title" content={`${language === 'nl' ? 'Lokaal Genieten in de Algarve' : 'Local Algarve Experience'} - ${language === 'nl' ? 'Authentieke Reisgids' : 'Authentic Travel Guide'}`} />
+        <meta property="og:description" content={language === 'nl' ? 
+          'Jouw gids naar verborgen parels en lokale ervaringen, weg van de drukte' :
+          'Your guide to hidden gems and local experiences away from the crowds'} />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://yourdomain.com/" />
       </Helmet>
@@ -119,7 +124,7 @@ const Index = () => {
         onCategorySelect={setSelectedCategory}
       />
 
-      {/* Hero Section */}
+      {/* Hero Section with Budget Calculator */}
       <HeroSection 
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
@@ -135,6 +140,13 @@ const Index = () => {
             onSearch={handleAdvancedSearch}
             className="max-w-4xl mx-auto"
           />
+        </div>
+      </div>
+
+      {/* Events Calendar */}
+      <div className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <EventsCalendar />
         </div>
       </div>
 
