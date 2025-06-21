@@ -1,331 +1,168 @@
 
-import React, { useState } from 'react';
-import { AlgarveLocation } from '../types/algarve';
+import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { Card, CardContent } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
-import { 
-  MapPin, Clock, Euro, Car, ExternalLink, Star, 
-  Camera, Wifi, Utensils, Parking, Users, AlertCircle,
-  Sun, CloudRain, Thermometer, Wind
-} from 'lucide-react';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "./ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { MapPin, Clock, Euro, Users, Camera, Car, Utensils, ExternalLink } from 'lucide-react';
+import { AlgarveLocation } from '../types/algarve';
 
 interface EnhancedLocationDetailProps {
   location: AlgarveLocation;
-  isOpen: boolean;
   onClose: () => void;
 }
 
-const EnhancedLocationDetail: React.FC<EnhancedLocationDetailProps> = ({ 
-  location, 
-  isOpen, 
-  onClose 
-}) => {
-  const { language, t } = useLanguage();
-  const [activeTab, setActiveTab] = useState('overview');
+const EnhancedLocationDetail: React.FC<EnhancedLocationDetailProps> = ({ location, onClose }) => {
+  const { language } = useLanguage();
 
-  const facilities = [
-    { icon: Parking, label: language === 'nl' ? 'Parkeren' : 'Parking', available: true },
-    { icon: Utensils, label: language === 'nl' ? 'Restaurant' : 'Restaurant', available: true },
-    { icon: Wifi, label: 'WiFi', available: false },
-    { icon: Users, label: language === 'nl' ? 'Gezinsvriendelijk' : 'Family friendly', available: true },
+  const practicalInfo = [
+    {
+      icon: Car,
+      label: language === 'nl' ? 'Parkeren' : 'Parking',
+      info: language === 'nl' ? 'Gratis parkeren beschikbaar' : 'Free parking available'
+    },
+    {
+      icon: Clock,
+      label: language === 'nl' ? 'Beste tijd' : 'Best time',
+      info: language === 'nl' ? 'Ochtend of late middag' : 'Morning or late afternoon'
+    },
+    {
+      icon: Users,
+      label: language === 'nl' ? 'Drukte' : 'Crowds',
+      info: language === 'nl' ? 'Rustig, vooral doordeweeks' : 'Quiet, especially weekdays'
+    }
   ];
 
-  const weather = {
-    temperature: '24°C',
-    condition: language === 'nl' ? 'Zonnig' : 'Sunny',
-    wind: '12 km/h',
-    humidity: '65%'
-  };
-
-  const bestTimeToVisit = {
-    months: language === 'nl' ? 'April - Oktober' : 'April - October',
-    bestHours: language === 'nl' ? '8:00 - 10:00 of 17:00 - 19:00' : '8:00 - 10:00 or 17:00 - 19:00',
-    crowdLevel: language === 'nl' ? 'Laag tot gemiddeld' : 'Low to medium'
-  };
-
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-xl max-w-6xl max-h-[90vh] w-full overflow-hidden">
-        <div className="relative h-80">
-          <img
-            src={location.imageUrl}
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="relative">
+          <img 
+            src={location.imageUrl} 
             alt={location.name}
-            className="w-full h-full object-cover"
+            className="w-full h-64 object-cover rounded-t-xl"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
           <button 
             onClick={onClose}
-            className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors"
+            className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100"
           >
-            ×
+            ✕
           </button>
-          <div className="absolute bottom-6 left-6 text-white">
-            <h1 className="text-4xl font-bold mb-2">{location.name}</h1>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-5 h-5" />
-                <span className="text-lg">{location.region.replace('-', ' ').toUpperCase()}</span>
+        </div>
+        
+        <div className="p-6">
+          <div className="flex items-start justify-between mb-4">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-800 mb-2">{location.name}</h1>
+              <div className="flex items-center gap-2 text-gray-600 mb-2">
+                <MapPin className="w-4 h-4" />
+                <span>{location.region}</span>
+              </div>
+              <Badge className="mb-4">
+                {location.category === 'hidden-villages' && (language === 'nl' ? 'Verborgen Dorp' : 'Hidden Village')}
+                {location.category === 'beaches-nature' && (language === 'nl' ? 'Strand & Natuur' : 'Beach & Nature')}
+                {location.category === 'food-drink' && (language === 'nl' ? 'Eten & Drinken' : 'Food & Drink')}
+                {location.category === 'transport' && (language === 'nl' ? 'Vervoer' : 'Transport')}
+              </Badge>
+            </div>
+            <div className="text-right">
+              <div className="flex items-center gap-1 mb-1">
+                <Euro className="w-4 h-4 text-green-600" />
+                <span className="font-semibold">€{location.averageCost}</span>
               </div>
               <div className="flex items-center gap-1">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                ))}
-                <span className="ml-2">4.8 (127 reviews)</span>
+                <Clock className="w-4 h-4 text-blue-600" />
+                <span className="text-sm">{location.duration}</span>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="p-6 overflow-y-auto max-h-[calc(90vh-320px)]">
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <Tabs defaultValue="overview" className="w-full">
             <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="overview">
-                {language === 'nl' ? 'Overzicht' : 'Overview'}
-              </TabsTrigger>
-              <TabsTrigger value="practical">
-                {language === 'nl' ? 'Praktisch' : 'Practical'}
-              </TabsTrigger>
-              <TabsTrigger value="tips">
-                {language === 'nl' ? 'Lokale Tips' : 'Local Tips'}
-              </TabsTrigger>
-              <TabsTrigger value="weather">
-                {language === 'nl' ? 'Weer & Tijd' : 'Weather & Time'}
-              </TabsTrigger>
+              <TabsTrigger value="overview">{language === 'nl' ? 'Overzicht' : 'Overview'}</TabsTrigger>
+              <TabsTrigger value="tips">{language === 'nl' ? 'Tips' : 'Tips'}</TabsTrigger>
+              <TabsTrigger value="practical">{language === 'nl' ? 'Praktisch' : 'Practical'}</TabsTrigger>
+              <TabsTrigger value="booking">{language === 'nl' ? 'Boeken' : 'Booking'}</TabsTrigger>
             </TabsList>
-
-            <TabsContent value="overview" className="space-y-6 mt-6">
+            
+            <TabsContent value="overview" className="space-y-4">
+              <p className="text-gray-700 leading-relaxed">
+                {language === 'nl' ? location.description.nl : location.description.en}
+              </p>
+              
               <div>
-                <h3 className="text-2xl font-bold mb-4">{t('description')}</h3>
-                <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                  {location.description[language]}
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold mb-4">{t('highlights')}</h3>
-                <div className="grid md:grid-cols-2 gap-3">
+                <h3 className="font-semibold mb-3">{language === 'nl' ? 'Hoogtepunten' : 'Highlights'}</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   {location.highlights.map((highlight, index) => (
-                    <div key={index} className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
-                      <Star className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                      <span className="text-gray-800">{highlight}</span>
+                    <div key={index} className="flex items-center gap-2">
+                      <Camera className="w-4 h-4 text-blue-600" />
+                      <span className="text-sm">{highlight}</span>
                     </div>
                   ))}
                 </div>
               </div>
-
-              <div>
-                <h3 className="text-xl font-semibold mb-4">
-                  {language === 'nl' ? 'Voorzieningen' : 'Facilities'}
-                </h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {facilities.map((facility, index) => {
-                    const Icon = facility.icon;
-                    return (
-                      <div key={index} className={`flex items-center gap-2 p-3 rounded-lg ${
-                        facility.available ? 'bg-green-50 text-green-800' : 'bg-gray-50 text-gray-500'
-                      }`}>
-                        <Icon className="w-5 h-5" />
-                        <span className="text-sm font-medium">{facility.label}</span>
-                      </div>
-                    );
-                  })}
+            </TabsContent>
+            
+            <TabsContent value="tips" className="space-y-4">
+              <h3 className="font-semibold">{language === 'nl' ? 'Lokale Tips' : 'Local Tips'}</h3>
+              <div className="space-y-3">
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Utensils className="w-4 h-4 text-blue-600" />
+                    <span className="font-medium">{language === 'nl' ? 'Eten' : 'Food'}</span>
+                  </div>
+                  <p className="text-sm text-gray-700">
+                    {language === 'nl' 
+                      ? 'Probeer de lokale tasca voor authentieke gerechten tegen budgetvriendelijke prijzen.'
+                      : 'Try the local tasca for authentic dishes at budget-friendly prices.'
+                    }
+                  </p>
+                </div>
+                <div className="bg-green-50 p-4 rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Clock className="w-4 h-4 text-green-600" />
+                    <span className="font-medium">{language === 'nl' ? 'Timing' : 'Timing'}</span>
+                  </div>
+                  <p className="text-sm text-gray-700">
+                    {language === 'nl' 
+                      ? 'Bezoek vroeg in de ochtend of rond zonsondergang voor de beste ervaring.'
+                      : 'Visit early morning or around sunset for the best experience.'
+                    }
+                  </p>
                 </div>
               </div>
             </TabsContent>
-
-            <TabsContent value="practical" className="space-y-6 mt-6">
-              <Card>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-4">{t('howToGetThere')}</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <Clock className="w-5 h-5 text-blue-600" />
-                      <span><strong>{t('travelTime')}:</strong> {location.accessInfo.duration}</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Euro className="w-5 h-5 text-green-600" />
-                      <span><strong>{language === 'nl' ? 'Kosten' : 'Cost'}:</strong> {location.accessInfo.cost}</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Car className="w-5 h-5 text-purple-600 mt-1" />
-                      <div>
-                        <strong>{language === 'nl' ? 'Vervoersopties' : 'Transport options'}:</strong>
-                        <ul className="list-disc list-inside mt-2 space-y-1">
-                          {location.accessInfo.transportOptions.map((option, index) => (
-                            <li key={index} className="text-gray-700">{option}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-4">{t('budgetTips')}</h3>
-                  <div className="space-y-3">
-                    {location.budgetTips.map((tip, index) => (
-                      <div key={index} className="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
-                        <Euro className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-800">{tip}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+            
+            <TabsContent value="practical" className="space-y-4">
+              <h3 className="font-semibold">{language === 'nl' ? 'Praktische Informatie' : 'Practical Information'}</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {practicalInfo.map((info, index) => (
+                  <Card key={index}>
+                    <CardContent className="p-4 text-center">
+                      <info.icon className="w-8 h-8 mx-auto mb-2 text-blue-600" />
+                      <h4 className="font-medium mb-1">{info.label}</h4>
+                      <p className="text-sm text-gray-600">{info.info}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </TabsContent>
-
-            <TabsContent value="tips" className="space-y-6 mt-6">
-              <Card>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-4">{t('localTips')}</h3>
-                  <div className="space-y-4">
-                    {location.localTips.map((tip, index) => (
-                      <div key={index} className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg">
-                        <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-800">{tip}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-4">
-                    {language === 'nl' ? 'Foto Tips' : 'Photography Tips'}
-                  </h3>
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-3 p-3 bg-purple-50 rounded-lg">
-                      <Camera className="w-5 h-5 text-purple-600 mt-0.5" />
-                      <span className="text-gray-800">
-                        {language === 'nl' 
-                          ? 'Beste licht: vroege ochtend (golden hour) of late middag'
-                          : 'Best light: early morning (golden hour) or late afternoon'
-                        }
-                      </span>
-                    </div>
-                    <div className="flex items-start gap-3 p-3 bg-purple-50 rounded-lg">
-                      <Camera className="w-5 h-5 text-purple-600 mt-0.5" />
-                      <span className="text-gray-800">
-                        {language === 'nl' 
-                          ? 'Gebruik een polarisatiefilter voor heldere kleuren bij water'
-                          : 'Use a polarizing filter for vibrant colors near water'
-                        }
-                      </span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="weather" className="space-y-6 mt-6">
-              <Card>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-4">
-                    {language === 'nl' ? 'Huidige Weersomstandigheden' : 'Current Weather'}
-                  </h3>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div className="flex items-center gap-3 p-3 bg-yellow-50 rounded-lg">
-                      <Thermometer className="w-5 h-5 text-yellow-600" />
-                      <div>
-                        <div className="font-semibold">{weather.temperature}</div>
-                        <div className="text-sm text-gray-600">{weather.condition}</div>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
-                      <Wind className="w-5 h-5 text-blue-600" />
-                      <div>
-                        <div className="font-semibold">{weather.wind}</div>
-                        <div className="text-sm text-gray-600">Wind</div>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-                      <CloudRain className="w-5 h-5 text-green-600" />
-                      <div>
-                        <div className="font-semibold">{weather.humidity}</div>
-                        <div className="text-sm text-gray-600">
-                          {language === 'nl' ? 'Luchtvochtigheid' : 'Humidity'}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-4">
-                    {language === 'nl' ? 'Beste Bezoektijd' : 'Best Time to Visit'}
-                  </h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <Sun className="w-5 h-5 text-orange-500" />
-                      <span><strong>{language === 'nl' ? 'Beste maanden' : 'Best months'}:</strong> {bestTimeToVisit.months}</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Clock className="w-5 h-5 text-blue-500" />
-                      <span><strong>{language === 'nl' ? 'Beste uren' : 'Best hours'}:</strong> {bestTimeToVisit.bestHours}</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Users className="w-5 h-5 text-purple-500" />
-                      <span><strong>{language === 'nl' ? 'Drukte niveau' : 'Crowd level'}:</strong> {bestTimeToVisit.crowdLevel}</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+            
+            <TabsContent value="booking" className="space-y-4">
+              <h3 className="font-semibold">{language === 'nl' ? 'Boek je Verblijf' : 'Book Your Stay'}</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {location.affiliateLinks?.map((link, index) => (
+                  <Button key={index} variant="outline" className="justify-between" asChild>
+                    <a href={link.url} target="_blank" rel="noopener noreferrer">
+                      <span>{link.platform}</span>
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </Button>
+                ))}
+              </div>
             </TabsContent>
           </Tabs>
-
-          {location.affiliateLinks && (
-            <div className="border-t pt-6 mt-6">
-              <h3 className="text-xl font-semibold mb-4">
-                {language === 'nl' ? 'Boek je ervaring' : 'Book your experience'}
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {location.affiliateLinks.accommodation && (
-                  <Button 
-                    onClick={() => window.open(location.affiliateLinks!.accommodation, '_blank')}
-                    size="lg"
-                  >
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    {t('accommodation')}
-                  </Button>
-                )}
-                {location.affiliateLinks.transport && (
-                  <Button 
-                    variant="outline"
-                    size="lg"
-                    onClick={() => window.open(location.affiliateLinks!.transport, '_blank')}
-                  >
-                    <Car className="w-4 h-4 mr-2" />
-                    {t('transport')}
-                  </Button>
-                )}
-                {location.affiliateLinks.activities && (
-                  <Button 
-                    variant="outline"
-                    size="lg"
-                    onClick={() => window.open(location.affiliateLinks!.activities, '_blank')}
-                  >
-                    <Star className="w-4 h-4 mr-2" />
-                    {t('activities')}
-                  </Button>
-                )}
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>
