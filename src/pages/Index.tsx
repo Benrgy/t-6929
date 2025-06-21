@@ -8,6 +8,8 @@ import FAQSection from '../components/FAQSection';
 import HeroSection from '../components/HeroSection';
 import NewsletterSection from '../components/NewsletterSection';
 import ContactSection from '../components/ContactSection';
+import BlogSection from '../components/BlogSection';
+import UserTipsSection from '../components/UserTipsSection';
 import { ContentCategory } from '../types/algarve';
 import { algarveLocations } from '../data/algarveLocations';
 import { algarveQA } from '../data/algarveQA';
@@ -110,6 +112,12 @@ const Index = () => {
                 >
                   {t('transport')}
                 </button>
+                <a href="#blog" className="text-gray-700 hover:text-blue-600 transition-colors px-3 py-2 rounded-md">
+                  {language === 'nl' ? 'Blog' : 'Blog'}
+                </a>
+                <a href="#faq" className="text-gray-700 hover:text-blue-600 transition-colors px-3 py-2 rounded-md">
+                  FAQ
+                </a>
               </div>
             </div>
             <LanguageSwitcher />
@@ -174,7 +182,7 @@ const Index = () => {
 
         {/* FAQ Section */}
         {filteredFAQs.length > 0 && (
-          <div className="mb-20">
+          <div className="mb-20" id="faq">
             <FAQSection 
               faqs={filteredFAQs}
               title={t('faq')}
@@ -205,6 +213,14 @@ const Index = () => {
 
         {/* Contact Section */}
         <ContactSection />
+      </div>
+
+      {/* User Tips Section */}
+      <UserTipsSection />
+
+      {/* Blog Section */}
+      <div id="blog">
+        <BlogSection />
       </div>
 
       {/* Footer */}
@@ -253,6 +269,9 @@ const Index = () => {
                   {language === 'nl' ? 'Voorwaarden' : 'Terms of Service'}
                 </a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                <li><a href="#blog" className="hover:text-white transition-colors">
+                  {language === 'nl' ? 'Blog' : 'Blog'}
+                </a></li>
               </ul>
             </div>
           </div>
