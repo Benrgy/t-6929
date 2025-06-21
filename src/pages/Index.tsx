@@ -2,16 +2,17 @@
 import React, { useState, useMemo } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import LanguageSwitcher from '../components/LanguageSwitcher';
-import SearchBar from '../components/SearchBar';
 import CategoryGrid from '../components/CategoryGrid';
 import LocationCard from '../components/LocationCard';
 import FAQSection from '../components/FAQSection';
+import HeroSection from '../components/HeroSection';
+import NewsletterSection from '../components/NewsletterSection';
+import ContactSection from '../components/ContactSection';
 import { ContentCategory } from '../types/algarve';
 import { algarveLocations } from '../data/algarveLocations';
 import { algarveQA } from '../data/algarveQA';
 import { Helmet } from 'react-helmet';
 import { Button } from '../components/ui/button';
-import { ExternalLink, Mail, Phone, MapPin, Search } from 'lucide-react';
 
 const Index = () => {
   const { t, language } = useLanguage();
@@ -117,57 +118,10 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative h-[70vh] bg-gradient-to-r from-blue-600 to-blue-800 overflow-hidden">
-        <div className="absolute inset-0">
-          <img 
-            src="/lovable-uploads/11f6c604-dd7e-4971-8d55-a247159bc234.png" 
-            alt="Algarve landscape"
-            className="w-full h-full object-cover opacity-30"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-800/60"></div>
-        <div className="relative container mx-auto px-4 h-full flex items-center">
-          <div className="text-white max-w-3xl">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              {t('title')}
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed">
-              {t('tagline')}
-            </p>
-            
-            <div className="max-w-lg mb-8">
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="text"
-                  placeholder={t('searchPlaceholder')}
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 rounded-lg text-gray-800 shadow-lg border-0 focus:ring-2 focus:ring-white/20"
-                />
-              </div>
-            </div>
-            
-            <div className="flex flex-wrap gap-4">
-              <Button 
-                size="lg"
-                className="bg-white text-blue-600 hover:bg-gray-100 shadow-lg"
-              >
-                {t('exploreMore')}
-              </Button>
-              <Button 
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white/10"
-                onClick={() => window.open('https://booking.com/algarve', '_blank')}
-              >
-                <ExternalLink className="w-4 h-4 mr-2" />
-                {t('accommodation')}
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <HeroSection 
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+      />
 
       <div className="container mx-auto px-4 py-16">
         {/* Category Filter */}
@@ -247,81 +201,10 @@ const Index = () => {
         )}
 
         {/* Newsletter Section */}
-        <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-2xl p-8 mb-16">
-          <div className="text-center mb-8">
-            <h3 className="text-3xl font-bold text-gray-800 mb-4">
-              {language === 'nl' ? 'Blijf op de hoogte van nieuwe ontdekkingen' : 'Stay Updated with New Discoveries'}
-            </h3>
-            <p className="text-gray-600 text-lg">
-              {language === 'nl' ? 
-                'Ontvang wekelijks de nieuwste tips over verborgen parels en lokale geheimen in de Algarve' :
-                'Receive weekly tips about hidden gems and local secrets in the Algarve'
-              }
-            </p>
-          </div>
-          <div className="max-w-md mx-auto flex gap-3">
-            <input 
-              type="email" 
-              placeholder={language === 'nl' ? 'Je e-mailadres' : 'Your email'}
-              className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-            <Button size="lg">
-              {language === 'nl' ? 'Aanmelden' : 'Subscribe'}
-            </Button>
-          </div>
-        </div>
+        <NewsletterSection />
 
         {/* Contact Section */}
-        <div className="bg-white rounded-2xl p-8 shadow-lg mb-16">
-          <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-            {language === 'nl' ? 'Deel je eigen geheime plekjes' : 'Share Your Own Secret Spots'}
-          </h3>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <h4 className="font-semibold text-lg mb-4">
-                {language === 'nl' ? 'Ken je een geweldige plek?' : 'Know a great place?'}
-              </h4>
-              <p className="text-gray-600 mb-6">
-                {language === 'nl' ? 
-                  'We zijn altijd op zoek naar nieuwe verborgen parels in de Algarve. Deel jouw favoriete lokale plekjes met andere reizigers!' :
-                  'We\'re always looking for new hidden gems in the Algarve. Share your favorite local spots with other travelers!'
-                }
-              </p>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <Mail className="w-5 h-5 text-blue-600" />
-                  <span>tips@algarveguide.com</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <MapPin className="w-5 h-5 text-blue-600" />
-                  <span>Algarve, Portugal</span>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="space-y-4">
-                <input 
-                  type="text" 
-                  placeholder={language === 'nl' ? 'Je naam' : 'Your name'}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <input 
-                  type="email" 
-                  placeholder={language === 'nl' ? 'Je e-mailadres' : 'Your email'}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <textarea 
-                  placeholder={language === 'nl' ? 'Vertel ons over je geheime plek...' : 'Tell us about your secret spot...'}
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                ></textarea>
-                <Button className="w-full" size="lg">
-                  {language === 'nl' ? 'Versturen' : 'Send'}
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ContactSection />
       </div>
 
       {/* Footer */}
