@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import LanguageSwitcher from '../components/LanguageSwitcher';
@@ -12,24 +13,54 @@ import UserTipsSection from '../components/UserTipsSection';
 import TestimonialsSection from '../components/TestimonialsSection';
 import BackToTop from '../components/BackToTop';
 import StatsSection from '../components/StatsSection';
+import AdvancedSearchBar from '../components/AdvancedSearchBar';
+import ReviewsSection from '../components/ReviewsSection';
 import { ContentCategory } from '../types/algarve';
 import { algarveLocations } from '../data/algarveLocations';
 import { algarveQA } from '../data/algarveQA';
 import { Helmet } from 'react-helmet';
 import { Button } from '../components/ui/button';
 
+interface SearchFilters {
+  category: ContentCategory | 'all';
+  budget: 'low' | 'medium' | 'high' | 'all';
+  duration: 'short' | 'half-day' | 'full-day' | 'all';
+  region: 'east-algarve' | 'central-algarve' | 'west-algarve' | 'interior' | 'all';
+  familyFriendly: boolean;
+}
+
 const Index = () => {
   const { t, language } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<ContentCategory | 'all'>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchFilters, setSearchFilters] = useState<SearchFilters>({
+    category: 'all',
+    budget: 'all',
+    duration: 'all',
+    region: 'all',
+    familyFriendly: false
+  });
+
+  const handleAdvancedSearch = (query: string, filters: SearchFilters) => {
+    setSearchQuery(query);
+    setSearchFilters(filters);
+    setSelectedCategory(filters.category);
+  };
 
   const filteredLocations = useMemo(() => {
     let filtered = algarveLocations;
     
+    // Apply basic category filter
     if (selectedCategory !== 'all') {
       filtered = filtered.filter(location => location.category === selectedCategory);
     }
     
+    // Apply advanced filters
+    if (searchFilters.region !== 'all') {
+      filtered = filtered.filter(location => location.region === searchFilters.region);
+    }
+    
+    // Apply search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(location => 
@@ -41,7 +72,7 @@ const Index = () => {
     }
     
     return filtered;
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery, searchFilters]);
 
   const filteredFAQs = useMemo(() => {
     let filtered = algarveQA;
@@ -69,8 +100,12 @@ const Index = () => {
         <title>{t('title')} - {language === 'nl' ? 'Authentieke Reisgids' : 'Authentic Travel Guide'}</title>
         <meta name="description" content={t('tagline')} />
         <meta name="keywords" content={language === 'nl' ? 
-          'Algarve, Portugal, verborgen dorpen, lokale tips, authentiek reizen, goedkoop, budget, geheime stranden' : 
+          'Algarve, Portugal, verborgen dorven, lokale tips, authentiek reizen, goedkoop, budget, geheime stranden' : 
           'Algarve, Portugal, hidden villages, local tips, authentic travel, budget, secret beaches'} />
+        <meta property="og:title" content={`${t('title')} - ${language === 'nl' ? 'Authentieke Reisgids' : 'Authentic Travel Guide'}`} />
+        <meta property="og:description" content={t('tagline')} />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://yourdomain.com/" />
       </Helmet>
       
       {/* Navigation */}
@@ -137,6 +172,14 @@ const Index = () => {
       <StatsSection />
 
       <div className="container mx-auto px-4 py-16">
+        {/* Advanced Search Bar */}
+        <div className="mb-12">
+          <AdvancedSearchBar 
+            onSearch={handleAdvancedSearch}
+            className="max-w-4xl mx-auto"
+          />
+        </div>
+
         {/* Category Filter */}
         <div className="mb-16">
           <div className="text-center mb-12">
@@ -167,7 +210,7 @@ const Index = () => {
 
         {/* Locations Grid */}
         {filteredLocations.length > 0 && (
-          <div className="mb-20">
+          <div className="mb-20" id="destinations">
             <h2 className="text-3xl font-bold text-gray-800 mb-8">
               {selectedCategory === 'all' ? 
                 (language === 'nl' ? 'Alle Bestemmingen' : 'All Destinations') : 
@@ -199,12 +242,21 @@ const Index = () => {
         {filteredLocations.length === 0 && filteredFAQs.length === 0 && searchQuery && (
           <div className="text-center py-16">
             <div className="max-w-md mx-auto">
-              <h3 className="text-2xl font-semibold text-gray-800 mb-4">Geen resultaten gevonden</h3>
+              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+                {language === 'nl' ? 'Geen resultaten gevonden' : 'No results found'}
+              </h3>
               <p className="text-gray-600 text-lg mb-6">{t('noResults')}</p>
               <Button 
                 onClick={() => {
                   setSearchQuery('');
                   setSelectedCategory('all');
+                  setSearchFilters({
+                    category: 'all',
+                    budget: 'all',
+                    duration: 'all',
+                    region: 'all',
+                    familyFriendly: false
+                  });
                 }}
               >
                 {t('exploreMore')}
@@ -219,6 +271,9 @@ const Index = () => {
         {/* Contact Section */}
         <ContactSection />
       </div>
+
+      {/* Reviews Section */}
+      <ReviewsSection />
 
       {/* Testimonials Section */}
       <TestimonialsSection />
@@ -246,6 +301,9 @@ const Index = () => {
                   'Your trusted guide to authentic experiences in the Algarve, far from the crowds of mass tourism.'
                 }
               </p>
+              <div className="mt-4 text-sm text-gray-400">
+                <p>&copy; 2024 {t('title')}. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}</p>
+              </div>
             </div>
             <div>
               <h4 className="font-semibold mb-4 text-lg">
@@ -285,9 +343,6 @@ const Index = () => {
                 </a></li>
               </ul>
             </div>
-          </div>
-          <div className="border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
-            <p>&copy; 2024 {t('title')}. {language === 'nl' ? 'Alle rechten voorbehouden.' : 'All rights reserved.'}</p>
           </div>
         </div>
       </footer>
