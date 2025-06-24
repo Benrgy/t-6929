@@ -17,6 +17,8 @@ import { algarveQA } from '../data/algarveQA';
 import { Helmet } from 'react-helmet';
 import LocalStoriesSection from '../components/LocalStoriesSection';
 import DetailedBudgetCalculator from '../components/DetailedBudgetCalculator';
+import CommunityForum from '../components/CommunityForum';
+import PhotoSharingSection from '../components/PhotoSharingSection';
 
 interface SearchFilters {
   category: ContentCategory | 'all';
@@ -172,6 +174,12 @@ const Index = () => {
 
       {/* Local Stories Section */}
       <LocalStoriesSection />
+
+      {/* Community Forum */}
+      <CommunityForum />
+
+      {/* Photo Sharing Section */}
+      <PhotoSharingSection />
 
       {/* Search Results Indicator */}
       {(searchQuery || searchFilters.category !== 'all' || searchFilters.budget !== 'all' || searchFilters.region !== 'all') && (
