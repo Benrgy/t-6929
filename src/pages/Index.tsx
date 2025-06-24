@@ -15,6 +15,8 @@ import { ContentCategory } from '../types/algarve';
 import { algarveLocations } from '../data/algarveLocations';
 import { algarveQA } from '../data/algarveQA';
 import { Helmet } from 'react-helmet';
+import LocalStoriesSection from '../components/LocalStoriesSection';
+import DetailedBudgetCalculator from '../components/DetailedBudgetCalculator';
 
 interface SearchFilters {
   category: ContentCategory | 'all';
@@ -164,6 +166,12 @@ const Index = () => {
           />
         </div>
       </div>
+
+      {/* Detailed Budget Calculator */}
+      <DetailedBudgetCalculator />
+
+      {/* Local Stories Section */}
+      <LocalStoriesSection />
 
       {/* Search Results Indicator */}
       {(searchQuery || searchFilters.category !== 'all' || searchFilters.budget !== 'all' || searchFilters.region !== 'all') && (
