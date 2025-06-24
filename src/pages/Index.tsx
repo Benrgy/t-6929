@@ -3,6 +3,7 @@ import React, { useState, useMemo } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import Navigation from '../components/Navigation';
 import HeroSection from '../components/HeroSection';
+import ImmersiveAtmosphere from '../components/ImmersiveAtmosphere';
 import StatsSection from '../components/StatsSection';
 import AdvancedSearchBar from '../components/AdvancedSearchBar';
 import ContentSections from '../components/ContentSections';
@@ -57,17 +58,14 @@ const Index = () => {
   const filteredLocations = useMemo(() => {
     let filtered = algarveLocations;
     
-    // Apply basic category filter
     if (selectedCategory !== 'all') {
       filtered = filtered.filter(location => location.category === selectedCategory);
     }
     
-    // Apply advanced filters
     if (searchFilters.region !== 'all') {
       filtered = filtered.filter(location => location.region === searchFilters.region);
     }
     
-    // Apply search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(location => 
@@ -104,17 +102,17 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Helmet>
-        <title>{language === 'nl' ? 'Lokaal Genieten in de Algarve - Jouw Authentieke Reisgids voor Budgetvriendelijk Reizen' : 'Local Algarve Experience - Your Authentic Budget Travel Guide'}</title>
+        <title>{language === 'nl' ? 'Ruik je het al? De Authentieke Algarve Roept - Jouw Lokale Reisgids' : 'Can You Smell It? The Authentic Algarve Calls - Your Local Travel Guide'}</title>
         <meta name="description" content={language === 'nl' ? 
-          'Ontdek de echte Algarve zoals een local. Budgetvriendelijke tips, verborgen parels, dorpen zonder toeristen en authentieke ervaringen. Inclusief budgetcalculator en lokale geheimen.' :
-          'Discover the real Algarve like a local. Budget-friendly tips, hidden gems, villages without tourists and authentic experiences. Including budget calculator and local secrets.'} />
+          'Van 3°C in Amsterdam naar 18°C in de Algarve. Ontdek de echte Portugal zoals locals het beleven. Thermale bronnen, verborgen dorpen, authentieke ervaringen voor slimme reizigers.' :
+          'From 3°C in Amsterdam to 18°C in the Algarve. Discover real Portugal like locals experience it. Thermal springs, hidden villages, authentic experiences for smart travelers.'} />
         <meta name="keywords" content={language === 'nl' ? 
-          'Algarve lokale tips, verborgen dorven Portugal, goedkoop reizen Algarve, authentiek, budget, geheime stranden, lokale markten, Alte, Monsaraz, Cacela Velha, budgetcalculator' : 
-          'Algarve local tips, hidden villages Portugal, budget travel Algarve, authentic, secret beaches, local markets, Alte, Monsaraz, Cacela Velha, budget calculator'} />
-        <meta property="og:title" content={`${language === 'nl' ? 'Lokaal Genieten in de Algarve' : 'Local Algarve Experience'} - ${language === 'nl' ? 'Authentieke Reisgids' : 'Authentic Travel Guide'}`} />
+          'Algarve lokale tips, thermale bronnen Portugal, authentieke dorpen, Nederlandse reizigers, lokale ervaring, Alte waterval, Monsaraz, geheime stranden, budgetreizen' : 
+          'Algarve local tips, thermal springs Portugal, authentic villages, Dutch travelers, local experience, Alte waterfall, Monsaraz, secret beaches, budget travel'} />
+        <meta property="og:title" content={`${language === 'nl' ? 'Ruik je het al? De Authentieke Algarve' : 'Can You Smell It? The Authentic Algarve'} - ${language === 'nl' ? 'Lokale Reisgids' : 'Local Travel Guide'}`} />
         <meta property="og:description" content={language === 'nl' ? 
-          'Jouw gids naar verborgen parels en lokale ervaringen, weg van de drukte. Met budgetcalculator en insider tips.' :
-          'Your guide to hidden gems and local experiences away from the crowds. With budget calculator and insider tips.'} />
+          'Van winterse kou naar zonnige warmte. Ontdek de Algarve zoals locals het beleven, met thermale bronnen, verborgen dorven en authentieke ervaringen.' :
+          'From winter cold to sunny warmth. Discover the Algarve like locals experience it, with thermal springs, hidden villages and authentic experiences.'} />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://yourdomain.com/" />
       </Helmet>
@@ -125,11 +123,14 @@ const Index = () => {
         onCategorySelect={setSelectedCategory}
       />
 
-      {/* Hero Section with Budget Calculator */}
+      {/* Immersive Hero Section */}
       <HeroSection 
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
       />
+
+      {/* Immersive Atmosphere Section */}
+      <ImmersiveAtmosphere />
 
       {/* Stats Section */}
       <StatsSection />
