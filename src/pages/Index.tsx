@@ -19,6 +19,9 @@ import LocalStoriesSection from '../components/LocalStoriesSection';
 import DetailedBudgetCalculator from '../components/DetailedBudgetCalculator';
 import CommunityForum from '../components/CommunityForum';
 import PhotoSharingSection from '../components/PhotoSharingSection';
+import WeatherWidget from '../components/WeatherWidget';
+import NearbyAttractionsWidget from '../components/NearbyAttractionsWidget';
+import LiveEventsTracker from '../components/LiveEventsTracker';
 
 interface SearchFilters {
   category: ContentCategory | 'all';
@@ -148,6 +151,15 @@ const Index = () => {
 
       {/* Stats Section */}
       <StatsSection />
+
+      {/* Weather Widget */}
+      <WeatherWidget />
+
+      {/* Nearby Attractions Widget */}
+      <NearbyAttractionsWidget />
+
+      {/* Live Events Tracker */}
+      <LiveEventsTracker />
 
       <div className="container mx-auto px-4 py-16">
         {/* Enhanced Search Bar */}
