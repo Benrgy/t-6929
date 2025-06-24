@@ -1,11 +1,10 @@
-
 import React, { useState, useMemo } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import Navigation from '../components/Navigation';
 import HeroSection from '../components/HeroSection';
 import ImmersiveAtmosphere from '../components/ImmersiveAtmosphere';
 import StatsSection from '../components/StatsSection';
-import AdvancedSearchBar from '../components/AdvancedSearchBar';
+import EnhancedSearchBar from '../components/EnhancedSearchBar';
 import ContentSections from '../components/ContentSections';
 import ComprehensiveFAQ from '../components/ComprehensiveFAQ';
 import EventsCalendar from '../components/EventsCalendar';
@@ -20,9 +19,10 @@ import { Helmet } from 'react-helmet';
 interface SearchFilters {
   category: ContentCategory | 'all';
   budget: 'low' | 'medium' | 'high' | 'all';
-  duration: 'short' | 'half-day' | 'full-day' | 'all';
+  duration: 'short' | 'half-day' | 'full-day' | 'multi-day' | 'all';
   region: 'east-algarve' | 'central-algarve' | 'west-algarve' | 'interior' | 'all';
   familyFriendly: boolean;
+  groupSize: 'solo' | 'couple' | 'family' | 'group' | 'all';
 }
 
 const Index = () => {
@@ -34,13 +34,22 @@ const Index = () => {
     budget: 'all',
     duration: 'all',
     region: 'all',
-    familyFriendly: false
+    familyFriendly: false,
+    groupSize: 'all'
   });
 
   const handleAdvancedSearch = (query: string, filters: SearchFilters) => {
     setSearchQuery(query);
     setSearchFilters(filters);
     setSelectedCategory(filters.category);
+    
+    // Scroll to results
+    setTimeout(() => {
+      const element = document.querySelector('#search-results');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   };
 
   const handleClearSearch = () => {
@@ -51,7 +60,8 @@ const Index = () => {
       budget: 'all',
       duration: 'all',
       region: 'all',
-      familyFriendly: false
+      familyFriendly: false,
+      groupSize: 'all'
     });
   };
 
@@ -136,14 +146,48 @@ const Index = () => {
       <StatsSection />
 
       <div className="container mx-auto px-4 py-16">
-        {/* Advanced Search Bar */}
+        {/* Enhanced Search Bar */}
         <div className="mb-12">
-          <AdvancedSearchBar 
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
+              {language === 'nl' ? '🔍 Vind jouw perfecte Algarve-ervaring' : '🔍 Find your perfect Algarve experience'}
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              {language === 'nl' 
+                ? 'Gebruik onze slimme zoekfunctie om precies te vinden wat bij jouw droomvakantie past. Van budget tot regio, wij helpen je zoeken.'
+                : 'Use our smart search to find exactly what fits your dream vacation. From budget to region, we help you search.'
+              }
+            </p>
+          </div>
+          <EnhancedSearchBar 
             onSearch={handleAdvancedSearch}
-            className="max-w-4xl mx-auto"
           />
         </div>
       </div>
+
+      {/* Search Results Indicator */}
+      {(searchQuery || searchFilters.category !== 'all' || searchFilters.budget !== 'all' || searchFilters.region !== 'all') && (
+        <div id="search-results" className="bg-orange-50 py-8">
+          <div className="container mx-auto px-4">
+            <div className="text-center">
+              <p className="text-gray-700">
+                {language === 'nl' 
+                  ? `Gevonden: ${filteredLocations.length} locaties en ${filteredFAQs.length} antwoorden`
+                  : `Found: ${filteredLocations.length} locations and ${filteredFAQs.length} answers`
+                }
+              </p>
+              {(searchQuery || getActiveFiltersCount() > 0) && (
+                <button
+                  onClick={handleClearSearch}
+                  className="mt-2 text-orange-600 hover:text-orange-700 underline"
+                >
+                  {language === 'nl' ? 'Zoekfilters wissen' : 'Clear search filters'}
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Comprehensive FAQ Section */}
       <div id="faq">
@@ -178,6 +222,17 @@ const Index = () => {
       <FooterSection onCategorySelect={setSelectedCategory} />
     </div>
   );
+
+  function getActiveFiltersCount() {
+    let count = 0;
+    if (searchFilters.category !== 'all') count++;
+    if (searchFilters.budget !== 'all') count++;
+    if (searchFilters.duration !== 'all') count++;
+    if (searchFilters.region !== 'all') count++;
+    if (searchFilters.familyFriendly) count++;
+    if (searchFilters.groupSize !== 'all') count++;
+    return count;
+  }
 };
 
 export default Index;
