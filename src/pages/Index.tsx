@@ -121,10 +121,10 @@ const Index = () => {
       <Helmet>
         <title>{language === 'nl' ? 'Ruik je het al? De Authentieke Algarve Roept - Jouw Lokale Reisgids' : 'Can You Smell It? The Authentic Algarve Calls - Your Local Travel Guide'}</title>
         <meta name="description" content={language === 'nl' ? 
-          'Van 3°C in Amsterdam naar 18°C in de Algarve. Ontdek de echte Portugal zoals locals het beleven. Thermale bronnen, verborgen dorpen, authentieke ervaringen voor slimme reizigers.' :
+          'Van 3°C in Amsterdam naar 18°C in de Algarve. Ontdek de echte Portugal zoals locals het beleven. Thermale bronnen, verborgen dorven, authentieke ervaringen voor slimme reizigers.' :
           'From 3°C in Amsterdam to 18°C in the Algarve. Discover real Portugal like locals experience it. Thermal springs, hidden villages, authentic experiences for smart travelers.'} />
         <meta name="keywords" content={language === 'nl' ? 
-          'Algarve lokale tips, thermale bronnen Portugal, authentieke dorpen, Nederlandse reizigers, lokale ervaring, Alte waterval, Monsaraz, geheime stranden, budgetreizen' : 
+          'Algarve lokale tips, thermale bronnen Portugal, authentieke dorven, Nederlandse reizigers, lokale ervaring, Alte waterval, Monsaraz, geheime stranden, budgetreizen' : 
           'Algarve local tips, thermal springs Portugal, authentic villages, Dutch travelers, local experience, Alte waterfall, Monsaraz, secret beaches, budget travel'} />
         <meta property="og:title" content={`${language === 'nl' ? 'Ruik je het al? De Authentieke Algarve' : 'Can You Smell It? The Authentic Algarve'} - ${language === 'nl' ? 'Lokale Reisgids' : 'Local Travel Guide'}`} />
         <meta property="og:description" content={language === 'nl' ? 
@@ -155,11 +155,11 @@ const Index = () => {
       {/* Weather Widget */}
       <WeatherWidget />
 
-      {/* Nearby Attractions Widget */}
-      <NearbyAttractionsWidget />
-
       {/* Live Events Tracker */}
       <LiveEventsTracker />
+
+      {/* Nearby Attractions Widget */}
+      <NearbyAttractionsWidget />
 
       <div className="container mx-auto px-4 py-16">
         {/* Enhanced Search Bar */}

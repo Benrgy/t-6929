@@ -11,8 +11,16 @@ import OfflineIndicator from './components/OfflineIndicator';
 import PerformanceMonitor from './components/PerformanceMonitor';
 import ConversionTracker from './components/ConversionTracker';
 import PerformanceAnalytics from './components/PerformanceAnalytics';
+import PerformanceOptimizer from './components/PerformanceOptimizer';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      gcTime: 10 * 60 * 1000, // 10 minutes
+    },
+  },
+});
 
 function App() {
   useEffect(() => {
@@ -34,6 +42,19 @@ function App() {
     link.rel = 'manifest';
     link.href = '/manifest.json';
     document.head.appendChild(link);
+
+    // Performance optimization: Preload critical routes
+    const preloadRoutes = () => {
+      const routes = ['/'];
+      routes.forEach(route => {
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = route;
+        document.head.appendChild(link);
+      });
+    };
+
+    preloadRoutes();
 
     return () => {
       const existingLink = document.head.querySelector('link[rel="manifest"]');
@@ -60,6 +81,7 @@ function App() {
               <OfflineIndicator />
               <PerformanceMonitor />
               <PerformanceAnalytics />
+              <PerformanceOptimizer />
             </div>
           </ConversionTracker>
         </Router>
