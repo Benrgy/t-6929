@@ -1,5 +1,6 @@
+
 import React, { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Index from './pages/Index';
 import NotFound from './pages/NotFound';
 import { LanguageProvider } from './context/LanguageContext';
@@ -33,25 +34,30 @@ function App() {
     document.head.appendChild(link);
 
     return () => {
-      document.head.removeChild(link);
+      const existingLink = document.head.querySelector('link[rel="manifest"]');
+      if (existingLink) {
+        document.head.removeChild(existingLink);
+      }
     };
   }, []);
 
   return (
     <LanguageProvider>
       <QueryClientProvider client={queryClient}>
-        <div className="min-h-screen bg-background font-sans antialiased">
-          <Toaster />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          
-          {/* PWA Features */}
-          <PWAInstallPrompt />
-          <OfflineIndicator />
-          <PerformanceMonitor />
-        </div>
+        <Router>
+          <div className="min-h-screen bg-background font-sans antialiased">
+            <Toaster />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            
+            {/* PWA Features */}
+            <PWAInstallPrompt />
+            <OfflineIndicator />
+            <PerformanceMonitor />
+          </div>
+        </Router>
       </QueryClientProvider>
     </LanguageProvider>
   );
