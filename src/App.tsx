@@ -9,6 +9,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import PWAInstallPrompt from './components/PWAInstallPrompt';
 import OfflineIndicator from './components/OfflineIndicator';
 import PerformanceMonitor from './components/PerformanceMonitor';
+import ConversionTracker from './components/ConversionTracker';
+import PerformanceAnalytics from './components/PerformanceAnalytics';
 
 const queryClient = new QueryClient();
 
@@ -45,18 +47,21 @@ function App() {
     <LanguageProvider>
       <QueryClientProvider client={queryClient}>
         <Router>
-          <div className="min-h-screen bg-background font-sans antialiased">
-            <Toaster />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            
-            {/* PWA Features */}
-            <PWAInstallPrompt />
-            <OfflineIndicator />
-            <PerformanceMonitor />
-          </div>
+          <ConversionTracker>
+            <div className="min-h-screen bg-background font-sans antialiased">
+              <Toaster />
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              
+              {/* PWA Features */}
+              <PWAInstallPrompt />
+              <OfflineIndicator />
+              <PerformanceMonitor />
+              <PerformanceAnalytics />
+            </div>
+          </ConversionTracker>
         </Router>
       </QueryClientProvider>
     </LanguageProvider>
