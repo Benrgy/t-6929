@@ -1,19 +1,18 @@
-import React, { useState, useMemo } from 'react';
+
+import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import Navigation from '../components/Navigation';
 import HeroSection from '../components/HeroSection';
 import ImmersiveAtmosphere from '../components/ImmersiveAtmosphere';
 import StatsSection from '../components/StatsSection';
-import EnhancedSearchBar from '../components/EnhancedSearchBar';
+import SearchSection from '../components/SearchSection';
 import ContentSections from '../components/ContentSections';
 import ComprehensiveFAQ from '../components/ComprehensiveFAQ';
 import EventsCalendar from '../components/EventsCalendar';
 import PageSections from '../components/PageSections';
 import FooterSection from '../components/FooterSection';
 import BackToTop from '../components/BackToTop';
-import { ContentCategory } from '../types/algarve';
-import { algarveLocations } from '../data/algarveLocations';
-import { algarveQA } from '../data/algarveQA';
+import SearchResultsIndicator from '../components/SearchResultsIndicator';
 import { Helmet } from 'react-helmet';
 import LocalStoriesSection from '../components/LocalStoriesSection';
 import DetailedBudgetCalculator from '../components/DetailedBudgetCalculator';
@@ -22,99 +21,22 @@ import PhotoSharingSection from '../components/PhotoSharingSection';
 import WeatherWidget from '../components/WeatherWidget';
 import NearbyAttractionsWidget from '../components/NearbyAttractionsWidget';
 import LiveEventsTracker from '../components/LiveEventsTracker';
-
-interface SearchFilters {
-  category: ContentCategory | 'all';
-  budget: 'low' | 'medium' | 'high' | 'all';
-  duration: 'short' | 'half-day' | 'full-day' | 'multi-day' | 'all';
-  region: 'east-algarve' | 'central-algarve' | 'west-algarve' | 'interior' | 'all';
-  familyFriendly: boolean;
-  groupSize: 'solo' | 'couple' | 'family' | 'group' | 'all';
-}
+import { useSearchAndFilters } from '../hooks/useSearchAndFilters';
 
 const Index = () => {
-  const { t, language } = useLanguage();
-  const [selectedCategory, setSelectedCategory] = useState<ContentCategory | 'all'>('all');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchFilters, setSearchFilters] = useState<SearchFilters>({
-    category: 'all',
-    budget: 'all',
-    duration: 'all',
-    region: 'all',
-    familyFriendly: false,
-    groupSize: 'all'
-  });
-
-  const handleAdvancedSearch = (query: string, filters: SearchFilters) => {
-    setSearchQuery(query);
-    setSearchFilters(filters);
-    setSelectedCategory(filters.category);
-    
-    // Scroll to results
-    setTimeout(() => {
-      const element = document.querySelector('#search-results');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
-  };
-
-  const handleClearSearch = () => {
-    setSearchQuery('');
-    setSelectedCategory('all');
-    setSearchFilters({
-      category: 'all',
-      budget: 'all',
-      duration: 'all',
-      region: 'all',
-      familyFriendly: false,
-      groupSize: 'all'
-    });
-  };
-
-  const filteredLocations = useMemo(() => {
-    let filtered = algarveLocations;
-    
-    if (selectedCategory !== 'all') {
-      filtered = filtered.filter(location => location.category === selectedCategory);
-    }
-    
-    if (searchFilters.region !== 'all') {
-      filtered = filtered.filter(location => location.region === searchFilters.region);
-    }
-    
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(location => 
-        location.name.toLowerCase().includes(query) ||
-        location.description.en.toLowerCase().includes(query) ||
-        location.description.nl.toLowerCase().includes(query) ||
-        location.highlights.some(highlight => highlight.toLowerCase().includes(query))
-      );
-    }
-    
-    return filtered;
-  }, [selectedCategory, searchQuery, searchFilters]);
-
-  const filteredFAQs = useMemo(() => {
-    let filtered = algarveQA;
-    
-    if (selectedCategory !== 'all') {
-      filtered = filtered.filter(faq => faq.category === selectedCategory);
-    }
-    
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(faq => 
-        faq.question.en.toLowerCase().includes(query) ||
-        faq.question.nl.toLowerCase().includes(query) ||
-        faq.answer.en.toLowerCase().includes(query) ||
-        faq.answer.nl.toLowerCase().includes(query)
-      );
-    }
-    
-    return filtered;
-  }, [selectedCategory, searchQuery]);
+  const { language } = useLanguage();
+  const {
+    selectedCategory,
+    setSelectedCategory,
+    searchQuery,
+    setSearchQuery,
+    searchFilters,
+    handleAdvancedSearch,
+    handleClearSearch,
+    getActiveFiltersCount,
+    filteredLocations,
+    filteredFAQs
+  } = useSearchAndFilters();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -161,25 +83,8 @@ const Index = () => {
       {/* Nearby Attractions Widget */}
       <NearbyAttractionsWidget />
 
-      <div className="container mx-auto px-4 py-16">
-        {/* Enhanced Search Bar */}
-        <div className="mb-12">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
-              {language === 'nl' ? '🔍 Vind jouw perfecte Algarve-ervaring' : '🔍 Find your perfect Algarve experience'}
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              {language === 'nl' 
-                ? 'Gebruik onze slimme zoekfunctie om precies te vinden wat bij jouw droomvakantie past. Van budget tot regio, wij helpen je zoeken.'
-                : 'Use our smart search to find exactly what fits your dream vacation. From budget to region, we help you search.'
-              }
-            </p>
-          </div>
-          <EnhancedSearchBar 
-            onSearch={handleAdvancedSearch}
-          />
-        </div>
-      </div>
+      {/* Enhanced Search Section */}
+      <SearchSection onSearch={handleAdvancedSearch} />
 
       {/* Detailed Budget Calculator */}
       <DetailedBudgetCalculator />
@@ -194,28 +99,13 @@ const Index = () => {
       <PhotoSharingSection />
 
       {/* Search Results Indicator */}
-      {(searchQuery || searchFilters.category !== 'all' || searchFilters.budget !== 'all' || searchFilters.region !== 'all') && (
-        <div id="search-results" className="bg-orange-50 py-8">
-          <div className="container mx-auto px-4">
-            <div className="text-center">
-              <p className="text-gray-700">
-                {language === 'nl' 
-                  ? `Gevonden: ${filteredLocations.length} locaties en ${filteredFAQs.length} antwoorden`
-                  : `Found: ${filteredLocations.length} locations and ${filteredFAQs.length} answers`
-                }
-              </p>
-              {(searchQuery || getActiveFiltersCount() > 0) && (
-                <button
-                  onClick={handleClearSearch}
-                  className="mt-2 text-orange-600 hover:text-orange-700 underline"
-                >
-                  {language === 'nl' ? 'Zoekfilters wissen' : 'Clear search filters'}
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      <SearchResultsIndicator
+        searchQuery={searchQuery}
+        activeFiltersCount={getActiveFiltersCount()}
+        locationsCount={filteredLocations.length}
+        faqsCount={filteredFAQs.length}
+        onClearSearch={handleClearSearch}
+      />
 
       {/* Comprehensive FAQ Section */}
       <div id="faq">
@@ -250,17 +140,6 @@ const Index = () => {
       <FooterSection onCategorySelect={setSelectedCategory} />
     </div>
   );
-
-  function getActiveFiltersCount() {
-    let count = 0;
-    if (searchFilters.category !== 'all') count++;
-    if (searchFilters.budget !== 'all') count++;
-    if (searchFilters.duration !== 'all') count++;
-    if (searchFilters.region !== 'all') count++;
-    if (searchFilters.familyFriendly) count++;
-    if (searchFilters.groupSize !== 'all') count++;
-    return count;
-  }
 };
 
 export default Index;
