@@ -1,66 +1,79 @@
 
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Index from './pages/Index';
+import AlgarveHomepage from './pages/AlgarveHomepage';
 import NotFound from './pages/NotFound';
 import { LanguageProvider } from './context/LanguageContext';
 import { Toaster } from 'sonner';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import PWAInstallPrompt from './components/PWAInstallPrompt';
-import OfflineIndicator from './components/OfflineIndicator';
-import PerformanceMonitor from './components/PerformanceMonitor';
-import ConversionTracker from './components/ConversionTracker';
-import PerformanceAnalytics from './components/PerformanceAnalytics';
-import PerformanceOptimizer from './components/PerformanceOptimizer';
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
-      gcTime: 10 * 60 * 1000, // 10 minutes
+      staleTime: 5 * 60 * 1000,
+      gcTime: 10 * 60 * 1000,
     },
   },
 });
 
 function App() {
   useEffect(() => {
-    // Register Service Worker
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then((registration) => {
-            console.log('SW registered: ', registration);
-          })
-          .catch((registrationError) => {
-            console.log('SW registration failed: ', registrationError);
-          });
-      });
-    }
-
-    // Add manifest link
+    // Add Google Fonts
     const link = document.createElement('link');
-    link.rel = 'manifest';
-    link.href = '/manifest.json';
+    link.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap';
+    link.rel = 'stylesheet';
     document.head.appendChild(link);
 
-    // Performance optimization: Preload critical routes
-    const preloadRoutes = () => {
-      const routes = ['/'];
-      routes.forEach(route => {
-        const link = document.createElement('link');
-        link.rel = 'prefetch';
-        link.href = route;
-        document.head.appendChild(link);
-      });
+    // Add SEO meta tags
+    document.title = 'Lokaal Genieten in de Algarve voor Weinig | Goedkope Vluchten & Authentieke Ervaringen';
+    
+    const metaDescription = document.createElement('meta');
+    metaDescription.name = 'description';
+    metaDescription.content = 'De beste tips voor Nederlandse reizigers in de Algarve. Goedkope Transavia vluchten vanaf €39, betaalbare accommodaties, lokale ervaringen en autoverhuur. Bespaar tot 40%!';
+    document.head.appendChild(metaDescription);
+
+    const metaKeywords = document.createElement('meta');
+    metaKeywords.name = 'keywords';
+    metaKeywords.content = 'algarve goedkoop, algarve voor weinig, transavia algarve, nederlanders algarve, goedkope vakantie algarve, algarve tips nederlanders, lokale ervaringen algarve';
+    document.head.appendChild(metaKeywords);
+
+    // Add structured data
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "TravelAgency",
+      "@id": "https://lokaalgenieten-algarve.com",
+      "name": "Lokaal Genieten in de Algarve",
+      "description": "Platform voor authentieke Algarve ervaringen en reisbenodigdheden",
+      "url": "https://lokaalgenieten-algarve.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "Algarve",
+        "addressCountry": "PT"
+      },
+      "priceRange": "€€",
+      "availableLanguage": ["nl", "en"]
     };
 
-    preloadRoutes();
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData);
+    document.head.appendChild(script);
+
+    // Affiliate link tracking
+    document.addEventListener('click', function(e) {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a');
+      
+      if (link && link.getAttribute('rel')?.includes('sponsored')) {
+        console.log('Affiliate click tracked:', link.href);
+        // In production, send to analytics
+      }
+    });
 
     return () => {
-      const existingLink = document.head.querySelector('link[rel="manifest"]');
-      if (existingLink) {
-        document.head.removeChild(existingLink);
-      }
+      // Cleanup
+      const existingLink = document.head.querySelector('link[href*="fonts.googleapis.com"]');
+      if (existingLink) document.head.removeChild(existingLink);
     };
   }, []);
 
@@ -68,22 +81,13 @@ function App() {
     <LanguageProvider>
       <QueryClientProvider client={queryClient}>
         <Router>
-          <ConversionTracker>
-            <div className="min-h-screen bg-background font-sans antialiased">
-              <Toaster />
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-              
-              {/* PWA Features */}
-              <PWAInstallPrompt />
-              <OfflineIndicator />
-              <PerformanceMonitor />
-              <PerformanceAnalytics />
-              <PerformanceOptimizer />
-            </div>
-          </ConversionTracker>
+          <div className="min-h-screen bg-background font-sans antialiased">
+            <Toaster />
+            <Routes>
+              <Route path="/" element={<AlgarveHomepage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
         </Router>
       </QueryClientProvider>
     </LanguageProvider>

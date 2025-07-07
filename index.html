@@ -1,32 +1,187 @@
 
 <!doctype html>
-<html lang="en">
+<html lang="nl">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <!-- Primary SEO Tags -->
+    <title>Lokaal Genieten in de Algarve voor Weinig | Goedkope Vluchten & Authentieke Ervaringen</title>
+    <meta name="description" content="De beste tips voor Nederlandse reizigers in de Algarve. Goedkope Transavia vluchten vanaf €39, betaalbare accommodaties, lokale ervaringen en autoverhuur. Bespaar tot 40%!" />
+    <meta name="keywords" content="algarve goedkoop, algarve voor weinig, transavia algarve, nederlanders algarve, goedkope vakantie algarve, algarve tips nederlanders, lokale ervaringen algarve, sunny cars algarve, booking algarve, airbnb algarve" />
+    <meta name="author" content="Lokaal Genieten Algarve" />
+    <link rel="canonical" href="https://lokaalgenieten-algarve.com/" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lokaalgenieten-algarve.com/" />
+    <meta property="og:title" content="Lokaal Genieten in de Algarve voor Weinig | Nederlandse Reisgids" />
+    <meta property="og:description" content="Authentieke Algarve ervaringen, goedkope vluchten en accommodaties. Speciaal voor Nederlandse reizigers. Bespaar tot 40% op je vakantie!" />
+    <meta property="og:image" content="https://lokaalgenieten-algarve.com/og-image.png" />
+    <meta property="og:locale" content="nl_NL" />
+    
+    <!-- Twitter -->  
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://lokaalgenieten-algarve.com/" />
+    <meta property="twitter:title" content="Lokaal Genieten in de Algarve voor Weinig" />
+    <meta property="twitter:description" content="Nederlandse reisgids voor authentieke Algarve ervaringen tegen betaalbare prijzen" />
+    <meta property="twitter:image" content="https://lokaalgenieten-algarve.com/og-image.png" />
+    
     <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#3b82f6" />
+    <meta name="theme-color" content="#0066CC" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Algarve Guide" />
     <meta name="mobile-web-app-capable" content="yes" />
     
-    <!-- Performance & SEO -->
-    <meta name="description" content="Ontdek de authentieke Algarve zoals locals het beleven. Thermale bronnen, verborgen dorpen, real-time tips." />
-    <meta name="keywords" content="Algarve, Portugal, lokale tips, reizen, thermale bronnen, authentiek" />
-    
-    <title>Lokaal Genieten in de Algarve - Authentieke Reisgids</title>
+    <!-- Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Preload critical resources -->
-    <link rel="preload" href="/og-image.png" as="image" />
+    <!-- Preload critical images -->
+    <link rel="preload" href="/lovable-uploads/1f6daf6e-7023-4399-9b7b-85dee316066e.png" as="image" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TravelAgency", 
+      "@id": "https://lokaalgenieten-algarve.com",
+      "name": "Lokaal Genieten in de Algarve",
+      "description": "Platform voor authentieke Algarve ervaringen en reisbenodigdheden voor Nederlandse reizigers",
+      "url": "https://lokaalgenieten-algarve.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "Algarve",
+        "addressCountry": "PT"
+      },
+      "priceRange": "€€",
+      "availableLanguage": ["nl", "en"],
+      "sameAs": [
+        "https://www.facebook.com/lokaalalgarve",
+        "https://www.instagram.com/lokaalalgarve"
+      ]
+    }
+    </script>
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX', {
+        page_title: 'Homepage',
+        page_location: window.location.href,
+        custom_parameter: 'algarve_travel_site'
+      });
+      
+      // Track affiliate clicks
+      document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('click', function(e) {
+          const target = e.target.closest('a');
+          if(target && target.getAttribute('rel') && target.getAttribute('rel').includes('sponsored')) {
+            gtag('event', 'affiliate_click', {
+              'event_category': 'monetization',
+              'event_label': target.hostname,
+              'value': 1
+            });
+          }
+        });
+      });
+    </script>
+    
+    <!-- Critical CSS for above-the-fold content -->
+    <style>
+      body { 
+        margin: 0; 
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
+        line-height: 1.6;
+        color: #333333;
+        background-color: #ffffff;
+      }
+      .hero { 
+        min-height: 100vh; 
+        position: relative; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      h1, h2, h3 { 
+        font-family: 'Playfair Display', serif; 
+        font-weight: 700;
+        line-height: 1.2;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+      /* Hide content until fonts load to prevent FOUT */
+      .font-display { font-display: swap; }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Cookie Notice Script -->
+    <script>
+      // Show cookie notice if not already accepted
+      document.addEventListener('DOMContentLoaded', function() {
+        if (!localStorage.getItem('cookiesAccepted')) {
+          setTimeout(function() {
+            const notice = document.createElement('div');
+            notice.id = 'cookie-notice';
+            notice.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#333;color:white;padding:15px;text-align:center;z-index:9999;';
+            notice.innerHTML = `
+              <p style="margin:0 0 10px 0;font-size:14px;">
+                We gebruiken cookies voor analytics en om te onthouden welke taal je kiest. We verkopen geen data. 
+                <a href="/privacy" style="color:#66c2ff;">Lees meer</a>
+              </p>
+              <button onclick="acceptCookies()" style="background:#0066CC;color:white;border:none;padding:8px 16px;border-radius:4px;cursor:pointer;">
+                Akkoord
+              </button>
+            `;
+            document.body.appendChild(notice);
+          }, 3000);
+        }
+      });
+
+      function acceptCookies() {
+        localStorage.setItem('cookiesAccepted', 'true');
+        const notice = document.getElementById('cookie-notice');
+        if (notice) notice.remove();
+      }
+      
+      // Affiliate link attribution
+      document.addEventListener('DOMContentLoaded', function() {
+        // Add affiliate tracking parameters
+        const bookingLinks = document.querySelectorAll('a[href*="booking.com"]');
+        bookingLinks.forEach(link => {
+          if (!link.href.includes('aid=')) {
+            link.href = link.href + (link.href.includes('?') ? '&' : '?') + 'aid=YOUR_BOOKING_AFFILIATE_ID';
+          }
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener noreferrer sponsored');
+        });
+
+        // Add affiliate icons
+        const affiliateLinks = document.querySelectorAll('a[rel*="sponsored"]');
+        affiliateLinks.forEach(link => {
+          if (!link.querySelector('.affiliate-icon')) {
+            const icon = document.createElement('span');
+            icon.className = 'affiliate-icon';
+            icon.style.cssText = 'font-size:12px;opacity:0.7;margin-left:2px;';
+            icon.title = 'Affiliate link - wij ontvangen commissie';
+            icon.innerHTML = ' 🔗';
+            link.appendChild(icon);
+          }
+        });
+      });
+    </script>
   </body>
 </html>
