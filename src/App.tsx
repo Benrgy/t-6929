@@ -1,11 +1,15 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AlgarveHomepage from './pages/AlgarveHomepage';
+import ExperiencesPage from './pages/ExperiencesPage';
+import FlightsPage from './pages/FlightsPage';
 import NotFound from './pages/NotFound';
 import { LanguageProvider } from './context/LanguageContext';
 import { Toaster } from 'sonner';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ExitIntentPopup from './components/ExitIntentPopup';
+import AffiliateTracker from './components/AffiliateTracker';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,6 +21,8 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  const [showExitPopup, setShowExitPopup] = useState(false);
+
   useEffect(() => {
     // Add Google Fonts
     const link = document.createElement('link');
@@ -59,19 +65,19 @@ function App() {
     script.text = JSON.stringify(structuredData);
     document.head.appendChild(script);
 
-    // Affiliate link tracking
-    document.addEventListener('click', function(e) {
-      const target = e.target as HTMLElement;
-      const link = target.closest('a');
-      
-      if (link && link.getAttribute('rel')?.includes('sponsored')) {
-        console.log('Affiliate click tracked:', link.href);
-        // In production, send to analytics
+    // Exit intent detection
+    let exitIntentShown = false;
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0 && !exitIntentShown) {
+        setShowExitPopup(true);
+        exitIntentShown = true;
       }
-    });
+    };
+
+    document.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
-      // Cleanup
+      document.removeEventListener('mouseleave', handleMouseLeave);
       const existingLink = document.head.querySelector('link[href*="fonts.googleapis.com"]');
       if (existingLink) document.head.removeChild(existingLink);
     };
@@ -83,10 +89,17 @@ function App() {
         <Router>
           <div className="min-h-screen bg-background font-sans antialiased">
             <Toaster />
+            <AffiliateTracker />
             <Routes>
               <Route path="/" element={<AlgarveHomepage />} />
+              <Route path="/ervaringen" element={<ExperiencesPage />} />
+              <Route path="/vluchten" element={<FlightsPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <ExitIntentPopup 
+              isVisible={showExitPopup} 
+              onClose={() => setShowExitPopup(false)} 
+            />
           </div>
         </Router>
       </QueryClientProvider>

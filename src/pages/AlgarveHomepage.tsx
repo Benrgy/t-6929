@@ -1,10 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Plane, Home, Car, MapPin, Star, Users, Calendar, Euro, ExternalLink, Flag } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface ServiceCard {
   id: string;
@@ -19,6 +19,7 @@ interface ServiceCard {
   icon: React.ReactNode;
   image: string;
   affiliateLink?: string;
+  internalLink?: string;
   secondaryButtonNL?: string;
   secondaryButtonEN?: string;
   secondaryLink?: string;
@@ -27,21 +28,10 @@ interface ServiceCard {
 const AlgarveHomepage: React.FC = () => {
   const { language, setLanguage } = useLanguage();
   const [currentDate, setCurrentDate] = useState('');
-  const [showExitPopup, setShowExitPopup] = useState(false);
   const [emailSignup, setEmailSignup] = useState('');
 
   useEffect(() => {
     setCurrentDate(new Date().toLocaleDateString(language === 'nl' ? 'nl-NL' : 'en-GB'));
-
-    // Exit intent detection
-    const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0) {
-        setShowExitPopup(true);
-      }
-    };
-
-    document.addEventListener('mouseleave', handleMouseLeave);
-    return () => document.removeEventListener('mouseleave', handleMouseLeave);
   }, [language]);
 
   const serviceCards: ServiceCard[] = [
@@ -57,7 +47,7 @@ const AlgarveHomepage: React.FC = () => {
       ctaEN: 'Compare Flights →',
       icon: <Plane className="w-8 h-8 text-blue-600" />,
       image: '/lovable-uploads/18170e0a-a211-46c5-97e6-3a78c27402e0.png',
-      affiliateLink: 'https://www.transavia.com/nl-NL/boek-een-vlucht/vluchten/zoeken/?utm_source=lokaalgenieten'
+      internalLink: '/vluchten'
     },
     {
       id: 'experiences',
@@ -70,7 +60,8 @@ const AlgarveHomepage: React.FC = () => {
       ctaNL: 'Bekijk Ervaringen →',
       ctaEN: 'View Experiences →',
       icon: <Users className="w-8 h-8 text-orange-600" />,
-      image: '/lovable-uploads/69bb7a55-5d7f-47aa-97d9-dba61283b32e.png'
+      image: '/lovable-uploads/69bb7a55-5d7f-47aa-97d9-dba61283b32e.png',
+      internalLink: '/ervaringen'
     },
     {
       id: 'accommodation',
@@ -142,9 +133,17 @@ const AlgarveHomepage: React.FC = () => {
   ];
 
   const handleAffiliateClick = (link: string, label: string) => {
-    // Track affiliate clicks
     console.log('Affiliate click tracked:', label);
     window.open(link, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleCardClick = (card: ServiceCard) => {
+    if (card.internalLink) {
+      // Navigate to internal page
+      window.location.href = card.internalLink;
+    } else if (card.affiliateLink) {
+      handleAffiliateClick(card.affiliateLink, card.id);
+    }
   };
 
   const getSeasonPriceIndication = () => {
@@ -166,8 +165,6 @@ const AlgarveHomepage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white font-sans">
-      {/* SEO Meta Tags would go in document head */}
-      
       {/* Language Toggle Header */}
       <div className="bg-blue-600 text-white py-2 px-4">
         <div className="container mx-auto flex justify-between items-center">
@@ -272,7 +269,7 @@ const AlgarveHomepage: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {serviceCards.map((card) => (
-              <Card key={card.id} className="hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <Card key={card.id} className="hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
                 <div className="relative h-48 overflow-hidden rounded-t-lg">
                   <img 
                     src={card.image} 
@@ -299,13 +296,21 @@ const AlgarveHomepage: React.FC = () => {
                   )}
                   
                   <div className="space-y-2">
-                    <Button 
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-                      onClick={() => card.affiliateLink && handleAffiliateClick(card.affiliateLink, card.id)}
-                    >
-                      {language === 'nl' ? card.ctaNL : card.ctaEN}
-                      <ExternalLink className="w-4 h-4 ml-2" />
-                    </Button>
+                    {card.internalLink ? (
+                      <Link to={card.internalLink}>
+                        <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                          {language === 'nl' ? card.ctaNL : card.ctaEN}
+                        </Button>
+                      </Link>
+                    ) : (
+                      <Button 
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                        onClick={() => handleCardClick(card)}
+                      >
+                        {language === 'nl' ? card.ctaNL : card.ctaEN}
+                        <ExternalLink className="w-4 h-4 ml-2" />
+                      </Button>
+                    )}
                     
                     {card.secondaryButtonNL && (
                       <Button 
@@ -479,47 +484,6 @@ const AlgarveHomepage: React.FC = () => {
           </div>
         </div>
       </footer>
-
-      {/* Exit Intent Popup */}
-      {showExitPopup && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <Card className="max-w-md w-full">
-            <CardContent className="p-6">
-              <button 
-                onClick={() => setShowExitPopup(false)}
-                className="float-right text-gray-400 hover:text-gray-600"
-              >
-                ✕
-              </button>
-              <h3 className="text-xl font-bold mb-4">
-                {language === 'nl' ? 'Gratis Algarve Tips PDF 🌞' : 'Free Algarve Tips PDF 🌞'}
-              </h3>
-              <p className="mb-4">
-                {language === 'nl' ? 'Ontvang onze verzameling praktische tips:' : 'Receive our collection of practical tips:'}
-              </p>
-              <ul className="text-sm space-y-1 mb-4">
-                <li>✓ {language === 'nl' ? 'Wanneer vluchten echt het goedkoopst zijn' : 'When flights are really cheapest'}</li>
-                <li>✓ {language === 'nl' ? 'Welke stranden gratis parkeren hebben' : 'Which beaches have free parking'}</li>
-                <li>✓ {language === 'nl' ? 'Waar locals eten (menu del dia €8-12)' : 'Where locals eat (menu del dia €8-12)'}</li>
-                <li>✓ {language === 'nl' ? 'Autoverhuur tips (let op de verzekering!)' : 'Car rental tips (watch the insurance!)'}</li>
-              </ul>
-              <div className="space-y-3">
-                <input
-                  type="email"
-                  placeholder={language === 'nl' ? 'Je e-mailadres' : 'Your email'}
-                  className="w-full px-3 py-2 border rounded"
-                />
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                  {language === 'nl' ? 'Stuur mij de gratis tips' : 'Send me the free tips'}
-                </Button>
-                <p className="text-xs text-gray-500 text-center">
-                  {language === 'nl' ? 'We sturen max. 1 email per maand met updates' : 'We send max. 1 email per month with updates'}
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
     </div>
   );
 };
