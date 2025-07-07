@@ -1,6 +1,11 @@
 
 import React, { useEffect } from 'react';
 
+// Declare gtag as a global function to avoid TypeScript errors
+declare global {
+  function gtag(...args: any[]): void;
+}
+
 const AffiliateTracker: React.FC = () => {
   useEffect(() => {
     // Add affiliate tracking parameters and icons
@@ -60,7 +65,7 @@ const AffiliateTracker: React.FC = () => {
         console.log('Affiliate click tracked:', link.href);
         
         // Track with analytics (mock for now)
-        if (typeof gtag !== 'undefined') {
+        if (typeof window !== 'undefined' && typeof gtag !== 'undefined') {
           gtag('event', 'affiliate_click', {
             'event_category': 'monetization',
             'event_label': link.hostname,
