@@ -1,6 +1,8 @@
 
 import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { useSEO } from '../hooks/useSEO';
+import { useAnalytics } from '../hooks/useAnalytics';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Plane, ExternalLink, Calendar, Euro, AlertTriangle } from 'lucide-react';
@@ -8,6 +10,10 @@ import { Plane, ExternalLink, Calendar, Euro, AlertTriangle } from 'lucide-react
 const FlightsPage: React.FC = () => {
   const { language } = useLanguage();
   const [currentDate] = useState(new Date().toLocaleDateString(language === 'nl' ? 'nl-NL' : 'en-GB'));
+  
+  // Initialize SEO and Analytics
+  const { updateSEO } = useSEO();
+  const { trackEvent, trackConversion } = useAnalytics();
 
   const priceData = [
     { month: language === 'nl' ? 'Januari-Maart' : 'January-March', transavia: '€80-150', tap: '€120-200', ryanair: '€60-120' },

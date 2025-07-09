@@ -7,6 +7,7 @@ import FlightsPage from './pages/FlightsPage';
 import NotFound from './pages/NotFound';
 import { LanguageProvider } from './context/LanguageContext';
 import { Toaster } from 'sonner';
+import { Toaster as ShadcnToaster } from '@/components/ui/toaster';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ExitIntentPopup from './components/ExitIntentPopup';
 import AffiliateTracker from './components/AffiliateTracker';
@@ -89,6 +90,7 @@ function App() {
         <Router>
           <div className="min-h-screen bg-background font-sans antialiased">
             <Toaster />
+            <ShadcnToaster />
             <AffiliateTracker />
             <Routes>
               <Route path="/" element={<AlgarveHomepage />} />

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { useSEO } from '../hooks/useSEO';
+import { useAnalytics } from '../hooks/useAnalytics';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -29,6 +31,10 @@ const AlgarveHomepage: React.FC = () => {
   const { language, setLanguage } = useLanguage();
   const [currentDate, setCurrentDate] = useState('');
   const [emailSignup, setEmailSignup] = useState('');
+  
+  // Initialize SEO and Analytics
+  const { updateSEO } = useSEO();
+  const { trackEvent, trackConversion } = useAnalytics();
 
   useEffect(() => {
     setCurrentDate(new Date().toLocaleDateString(language === 'nl' ? 'nl-NL' : 'en-GB'));
