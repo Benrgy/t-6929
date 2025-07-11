@@ -38,7 +38,10 @@ const AlgarveHomepage: React.FC = () => {
 
   useEffect(() => {
     setCurrentDate(new Date().toLocaleDateString(language === 'nl' ? 'nl-NL' : 'en-GB'));
-  }, [language]);
+    
+    // Track page view
+    trackEvent('page_view', 'homepage', 'load');
+  }, [language, trackEvent]);
 
   const serviceCards: ServiceCard[] = [
     {
@@ -139,7 +142,8 @@ const AlgarveHomepage: React.FC = () => {
   ];
 
   const handleAffiliateClick = (link: string, label: string) => {
-    console.log('Affiliate click tracked:', label);
+    trackEvent('affiliate_click', 'homepage', label);
+    trackConversion('homepage_affiliate_click');
     window.open(link, '_blank', 'noopener,noreferrer');
   };
 
@@ -230,19 +234,29 @@ const AlgarveHomepage: React.FC = () => {
 
           {/* Quick Action Buttons */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            <Button className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border border-white/30 h-16">
-              <Plane className="w-5 h-5 mr-2" />
-              {language === 'nl' ? 'Lokale Ervaringen' : 'Local Experiences'}
-            </Button>
-            <Button className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border border-white/30 h-16">
-              <Users className="w-5 h-5 mr-2" />
-              {language === 'nl' ? 'Goedkope Vluchten' : 'Cheap Flights'}
-            </Button>
-            <Button className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border border-white/30 h-16">
+            <Link to="/ervaringen">
+              <Button className="w-full bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border border-white/30 h-16">
+                <Users className="w-5 h-5 mr-2" />
+                {language === 'nl' ? 'Lokale Ervaringen' : 'Local Experiences'}
+              </Button>
+            </Link>
+            <Link to="/vluchten">
+              <Button className="w-full bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border border-white/30 h-16">
+                <Plane className="w-5 h-5 mr-2" />
+                {language === 'nl' ? 'Goedkope Vluchten' : 'Cheap Flights'}
+              </Button>
+            </Link>
+            <Button 
+              className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border border-white/30 h-16"
+              onClick={() => handleAffiliateClick('https://www.booking.com/searchresults.html?ss=Algarve&aid=YOUR_BOOKING_AFFILIATE_ID', 'hero-accommodations')}
+            >
               <Home className="w-5 h-5 mr-2" />
               {language === 'nl' ? 'Accommodaties' : 'Accommodations'}
             </Button>
-            <Button className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border border-white/30 h-16">
+            <Button 
+              className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border border-white/30 h-16"
+              onClick={() => handleAffiliateClick('https://www.sunnycars.com/?affiliate=YOUR_SUNNY_CARS_ID', 'hero-car-rental')}
+            >
               <Car className="w-5 h-5 mr-2" />
               {language === 'nl' ? 'Autoverhuur' : 'Car Rental'}
             </Button>

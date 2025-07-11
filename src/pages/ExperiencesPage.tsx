@@ -127,7 +127,8 @@ const ExperiencesPage: React.FC = () => {
   }, [selectedLocation, selectedType, selectedPrice]);
 
   const handleAffiliateClick = (link: string, experienceId: string) => {
-    console.log('Experience affiliate click tracked:', experienceId);
+    trackEvent('affiliate_click', 'experience', experienceId);
+    trackConversion('experience_click');
     window.open(link, '_blank', 'noopener,noreferrer');
   };
 

@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AlgarveHomepage from './pages/AlgarveHomepage';
 import ExperiencesPage from './pages/ExperiencesPage';
 import FlightsPage from './pages/FlightsPage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
 import NotFound from './pages/NotFound';
 import { LanguageProvider } from './context/LanguageContext';
 import { Toaster } from 'sonner';
@@ -96,6 +98,8 @@ function App() {
               <Route path="/" element={<AlgarveHomepage />} />
               <Route path="/ervaringen" element={<ExperiencesPage />} />
               <Route path="/vluchten" element={<FlightsPage />} />
+              <Route path="/over-ons" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <ExitIntentPopup 
