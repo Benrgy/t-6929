@@ -7,6 +7,7 @@ import FlightsPage from './pages/FlightsPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import NotFound from './pages/NotFound';
+import BreadcrumbNavigation from './components/BreadcrumbNavigation';
 import { LanguageProvider } from './context/LanguageContext';
 import { Toaster } from 'sonner';
 import { Toaster as ShadcnToaster } from '@/components/ui/toaster';
@@ -94,10 +95,11 @@ function App() {
             <Toaster />
             <ShadcnToaster />
             <AffiliateTracker />
+            <BreadcrumbNavigation />
             <Routes>
               <Route path="/" element={<AlgarveHomepage />} />
-              <Route path="/ervaringen" element={<ExperiencesPage />} />
-              <Route path="/vluchten" element={<FlightsPage />} />
+              <Route path="/experiences" element={<ExperiencesPage />} />
+              <Route path="/flights" element={<FlightsPage />} />
               <Route path="/over-ons" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="*" element={<NotFound />} />

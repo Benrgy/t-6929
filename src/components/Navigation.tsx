@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import LanguageSwitcher from './LanguageSwitcher';
 import { ContentCategory } from '../types/algarve';
@@ -12,6 +13,7 @@ interface NavigationProps {
 
 const Navigation: React.FC<NavigationProps> = ({ selectedCategory, onCategorySelect }) => {
   const { t, language } = useLanguage();
+  const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const menuItems = [
@@ -26,15 +28,31 @@ const Navigation: React.FC<NavigationProps> = ({ selectedCategory, onCategorySel
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
             <span className="text-2xl">🌅</span>
             <h1 className="text-xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
               {language === 'nl' ? 'Lokale Algarve' : 'Local Algarve'}
             </h1>
-          </div>
+          </Link>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6">
+            <Link 
+              to="/experiences" 
+              className={`text-gray-700 hover:text-orange-600 transition-colors px-3 py-2 rounded-lg font-medium ${
+                location.pathname === '/experiences' ? 'bg-orange-50 text-orange-600' : ''
+              }`}
+            >
+              🎯 {language === 'nl' ? 'Ervaringen' : 'Experiences'}
+            </Link>
+            <Link 
+              to="/flights" 
+              className={`text-gray-700 hover:text-orange-600 transition-colors px-3 py-2 rounded-lg font-medium ${
+                location.pathname === '/flights' ? 'bg-orange-50 text-orange-600' : ''
+              }`}
+            >
+              ✈️ {language === 'nl' ? 'Vluchten' : 'Flights'}
+            </Link>
             {menuItems.map((item) => (
               <button
                 key={item.id}
@@ -47,12 +65,22 @@ const Navigation: React.FC<NavigationProps> = ({ selectedCategory, onCategorySel
                 <span className="font-medium">{item.label}</span>
               </button>
             ))}
-            <a href="#blog" className="text-gray-700 hover:text-orange-600 transition-colors px-3 py-2 rounded-lg font-medium">
-              📰 {language === 'nl' ? 'Blog' : 'Blog'}
-            </a>
-            <a href="#faq" className="text-gray-700 hover:text-orange-600 transition-colors px-3 py-2 rounded-lg font-medium">
-              ❓ FAQ
-            </a>
+            <Link 
+              to="/over-ons" 
+              className={`text-gray-700 hover:text-orange-600 transition-colors px-3 py-2 rounded-lg font-medium ${
+                location.pathname === '/over-ons' ? 'bg-orange-50 text-orange-600' : ''
+              }`}
+            >
+              ℹ️ {language === 'nl' ? 'Over Ons' : 'About'}
+            </Link>
+            <Link 
+              to="/contact" 
+              className={`text-gray-700 hover:text-orange-600 transition-colors px-3 py-2 rounded-lg font-medium ${
+                location.pathname === '/contact' ? 'bg-orange-50 text-orange-600' : ''
+              }`}
+            >
+              📞 Contact
+            </Link>
           </div>
 
           {/* Language Switcher & Mobile Menu Button */}

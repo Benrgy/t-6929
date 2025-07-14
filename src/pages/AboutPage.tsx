@@ -19,8 +19,8 @@ const AboutPage: React.FC = () => {
       description: language === 'nl'
         ? 'Leer meer over ons team en onze missie om Nederlandse reizigers te helpen de Algarve authentiek en betaalbaar te ontdekken.'
         : 'Learn more about our team and mission to help Dutch travelers discover the Algarve authentically and affordably.',
-      keywords: ['algarve team', 'over ons', 'missie', 'nederlandse reizigers', 'authentiek reizen'],
-      canonicalUrl: window.location.href
+      keywords: 'algarve team, over ons, missie, nederlandse reizigers, authentiek reizen',
+      canonical: window.location.href
     });
     
     trackEvent('page_view', 'about', 'load');

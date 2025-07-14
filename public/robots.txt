@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# Block unnecessary pages
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /*?*utm_*
+Disallow: /*?*ref=*
+
+# Important files
+Sitemap: https://lokaalgenieteninalgarvevoorweinig.lovable.app/sitemap.xml
+
+# Crawl-delay for considerate crawling
+Crawl-delay: 1
+
+# Block common bad bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

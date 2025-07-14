@@ -27,8 +27,8 @@ const ContactPage: React.FC = () => {
       description: language === 'nl'
         ? 'Neem contact met ons op voor vragen over de Algarve, feedback of tips. We helpen Nederlandse reizigers graag verder.'
         : 'Contact us for questions about the Algarve, feedback or tips. We\'re happy to help Dutch travelers.',
-      keywords: ['algarve contact', 'vragen algarve', 'contact nederlandse reisgids', 'algarve hulp'],
-      canonicalUrl: window.location.href
+      keywords: 'algarve contact, vragen algarve, contact nederlandse reisgids, algarve hulp',
+      canonical: window.location.href
     });
     
     trackEvent('page_view', 'contact', 'load');
