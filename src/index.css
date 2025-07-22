@@ -5,65 +5,93 @@
 
 @layer base {
   :root {
+    /* Modern Travel Website Design System */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 215 27% 17%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 215 27% 17%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 215 27% 17%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Ocean Blue - Primary Brand Color */
+    --primary: 207 90% 40%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 207 90% 60%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Warm Terracotta - Secondary */
+    --secondary: 16 85% 55%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Sandy Neutral */
+    --muted: 45 15% 94%;
+    --muted-foreground: 215 20% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Sunset Orange */
+    --accent: 24 95% 58%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 45 15% 88%;
+    --input: 45 15% 88%;
+    --ring: 207 90% 40%;
 
-    --radius: 0.5rem;
+    /* Travel-specific design tokens */
+    --gradient-hero: linear-gradient(135deg, hsl(207 90% 40%), hsl(16 85% 55%), hsl(24 95% 58%));
+    --gradient-ocean: linear-gradient(180deg, hsl(199 89% 48%), hsl(207 90% 40%));
+    --gradient-sunset: linear-gradient(135deg, hsl(24 95% 58%), hsl(16 85% 55%));
+    --gradient-sand: linear-gradient(180deg, hsl(45 60% 85%), hsl(45 30% 75%));
+    
+    /* Shadows with brand colors */
+    --shadow-primary: 0 10px 30px -5px hsl(207 90% 40% / 0.3);
+    --shadow-warm: 0 10px 30px -5px hsl(16 85% 55% / 0.25);
+    --shadow-soft: 0 4px 20px -2px hsl(215 20% 45% / 0.15);
+    
+    /* Travel atmosphere effects */
+    --blur-ocean: blur(1px);
+    --blur-dreamy: blur(2px);
+    
+    --radius: 1rem;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Dark mode for evening browsing */
+    --background: 215 30% 8%;
+    --foreground: 0 0% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 215 30% 10%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 215 30% 10%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 207 90% 60%;
+    --primary-foreground: 215 30% 8%;
+    --primary-glow: 207 90% 70%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 16 75% 50%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 215 25% 15%;
+    --muted-foreground: 215 15% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 24 85% 60%;
+    --accent-foreground: 215 30% 8%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 215 25% 20%;
+    --input: 215 25% 20%;
+    --ring: 207 90% 60%;
+
+    /* Dark mode gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(215 30% 8%), hsl(215 25% 15%), hsl(207 90% 20%));
+    --gradient-ocean: linear-gradient(180deg, hsl(207 90% 20%), hsl(215 30% 8%));
+    --shadow-primary: 0 10px 30px -5px hsl(207 90% 60% / 0.4);
   }
 }
 
@@ -75,26 +103,95 @@
   body {
     @apply bg-background text-foreground font-sans;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    scroll-behavior: smooth;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-semibold;
   }
+
+  /* Travel website typography */
+  .hero-title {
+    @apply text-5xl md:text-7xl font-bold leading-tight;
+    font-family: 'Playfair Display', serif;
+    background: var(--gradient-sunset);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .travel-card {
+    @apply bg-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .travel-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-primary);
+  }
+
+  .ocean-gradient {
+    background: var(--gradient-ocean);
+  }
+
+  .sunset-gradient {
+    background: var(--gradient-sunset);
+  }
+
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+
+  .sand-gradient {
+    background: var(--gradient-sand);
+  }
 }
 
-/* Custom scrollbar */
+/* Travel-themed scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100;
+  background: hsl(var(--muted));
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-400 rounded;
+  background: var(--gradient-ocean);
+  border-radius: 1rem;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-500;
+  background: var(--gradient-sunset);
+}
+
+/* Travel-specific animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes wave {
+  0%, 100% { transform: translateX(0px) translateY(0px); }
+  33% { transform: translateX(30px) translateY(-10px); }
+  66% { transform: translateX(-20px) translateY(10px); }
+}
+
+.travel-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.travel-shimmer {
+  background: linear-gradient(90deg, transparent, hsl(var(--primary-glow) / 0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.travel-wave {
+  animation: wave 4s ease-in-out infinite;
 }
