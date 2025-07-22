@@ -26,7 +26,7 @@ export const useSEO = () => {
           { name: language === 'nl' ? 'Home' : 'Home', url: window.location.origin }
         ])
       });
-    } else if (path === '/ervaringen') {
+    } else if (path === '/experiences') {
       updateSEO({
         title: language === 'nl' 
           ? 'Authentieke Algarve Ervaringen met Locals | Food Tours & Activiteiten'
@@ -41,7 +41,7 @@ export const useSEO = () => {
           { name: language === 'nl' ? 'Ervaringen' : 'Experiences', url: window.location.href }
         ])
       });
-    } else if (path === '/vluchten') {
+    } else if (path === '/flights') {
       updateSEO({
         title: language === 'nl' 
           ? 'Goedkope Vluchten naar de Algarve | Transavia, TAP, Ryanair Vergelijken'

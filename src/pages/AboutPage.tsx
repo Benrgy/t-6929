@@ -1,30 +1,27 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { useSEO } from '../hooks/useSEO';
-import { useAnalytics } from '../hooks/useAnalytics';
 import { Card, CardContent } from '../components/ui/card';
 import { Heart, Users, Shield, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const AboutPage: React.FC = () => {
   const { language } = useLanguage();
-  const { updateSEO } = useSEO();
-  const { trackEvent } = useAnalytics();
 
   React.useEffect(() => {
-    updateSEO({
-      title: language === 'nl' 
-        ? 'Over Ons | Lokaal Genieten in de Algarve'
-        : 'About Us | Enjoy Local Algarve for Less',
-      description: language === 'nl'
-        ? 'Leer meer over ons team en onze missie om Nederlandse reizigers te helpen de Algarve authentiek en betaalbaar te ontdekken.'
-        : 'Learn more about our team and mission to help Dutch travelers discover the Algarve authentically and affordably.',
-      keywords: 'algarve team, over ons, missie, nederlandse reizigers, authentiek reizen',
-      canonical: window.location.href
-    });
+    // Set page title
+    document.title = language === 'nl' 
+      ? 'Over Ons | Lokaal Genieten in de Algarve'
+      : 'About Us | Enjoy Local Algarve for Less';
     
-    trackEvent('page_view', 'about', 'load');
-  }, [language, updateSEO, trackEvent]);
+    // Set meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', language === 'nl'
+        ? 'Leer meer over ons team en onze missie om Nederlandse reizigers te helpen de Algarve authentiek en betaalbaar te ontdekken.'
+        : 'Learn more about our team and mission to help Dutch travelers discover the Algarve authentically and affordably.'
+      );
+    }
+  }, [language]);
 
   return (
     <div className="min-h-screen bg-white">
