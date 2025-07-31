@@ -424,9 +424,9 @@ const AlgarveHomepage: React.FC = () => {
             ? 'Deze site bevat affiliate links. Als je via onze links boekt, ontvangen wij een kleine commissie zonder extra kosten voor jou. Wij selecteren alleen partners die wij zelf vertrouwen.'
             : 'This site contains affiliate links. If you book through our links, we receive a small commission at no extra cost to you. We only select partners we trust ourselves.'
           }
-          <a href="/over-ons" className="text-blue-600 underline ml-1">
+          <Link to="/over-ons" className="text-blue-600 underline ml-1">
             {language === 'nl' ? 'Lees meer over onze werkwijze' : 'Read more about our approach'}
-          </a>
+          </Link>
         </p>
       </div>
 
@@ -548,13 +548,13 @@ const AlgarveHomepage: React.FC = () => {
             <div>
               <h4 className="font-semibold mb-3">{language === 'nl' ? 'Snelle Links' : 'Quick Links'}</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="/over-ons" className="text-gray-300 hover:text-white">
+                <li><Link to="/over-ons" className="text-gray-300 hover:text-white">
                   {language === 'nl' ? 'Over Ons' : 'About Us'}
-                </a></li>
-                <li><a href="/contact" className="text-gray-300 hover:text-white">Contact</a></li>
-                <li><a href="/privacy" className="text-gray-300 hover:text-white">
+                </Link></li>
+                <li><Link to="/contact" className="text-gray-300 hover:text-white">Contact</Link></li>
+                <li><Link to="/privacy" className="text-gray-300 hover:text-white">
                   {language === 'nl' ? 'Privacy Beleid' : 'Privacy Policy'}
-                </a></li>
+                </Link></li>
               </ul>
             </div>
             <div>

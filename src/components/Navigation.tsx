@@ -116,22 +116,38 @@ const Navigation: React.FC<NavigationProps> = ({ selectedCategory, onCategorySel
                   <span className="font-medium">{item.label}</span>
                 </button>
               ))}
-              <a 
-                href="#blog" 
+              <Link 
+                to="/experiences"
                 className="w-full flex items-center gap-3 text-left px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <span className="text-xl">📰</span>
-                <span className="font-medium">{language === 'nl' ? 'Blog' : 'Blog'}</span>
-              </a>
-              <a 
-                href="#faq" 
+                <span className="text-xl">🎯</span>
+                <span className="font-medium">{language === 'nl' ? 'Ervaringen' : 'Experiences'}</span>
+              </Link>
+              <Link 
+                to="/flights"
                 className="w-full flex items-center gap-3 text-left px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <span className="text-xl">❓</span>
-                <span className="font-medium">FAQ</span>
-              </a>
+                <span className="text-xl">✈️</span>
+                <span className="font-medium">{language === 'nl' ? 'Vluchten' : 'Flights'}</span>
+              </Link>
+              <Link 
+                to="/over-ons"
+                className="w-full flex items-center gap-3 text-left px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span className="text-xl">ℹ️</span>
+                <span className="font-medium">{language === 'nl' ? 'Over Ons' : 'About'}</span>
+              </Link>
+              <Link 
+                to="/contact"
+                className="w-full flex items-center gap-3 text-left px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span className="text-xl">📞</span>
+                <span className="font-medium">Contact</span>
+              </Link>
             </div>
           </div>
         )}

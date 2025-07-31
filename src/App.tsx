@@ -102,6 +102,7 @@ function App() {
               <Route path="/flights" element={<FlightsPage />} />
               <Route path="/over-ons" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/privacy" element={<ContactPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <ExitIntentPopup 
