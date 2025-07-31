@@ -70,7 +70,7 @@ const AlgarveHomepage: React.FC = () => {
       ctaEN: 'View Experiences →',
       icon: <Users className="w-8 h-8 text-orange-600" />,
       image: '/lovable-uploads/69bb7a55-5d7f-47aa-97d9-dba61283b32e.png',
-      internalLink: '/ervaringen'
+      internalLink: '/experiences'
     },
     {
       id: 'accommodation',
@@ -279,7 +279,7 @@ const AlgarveHomepage: React.FC = () => {
 
             {/* Modern CTA Buttons */}
             <div className="flex flex-wrap gap-6">
-              <Link to="/ervaringen">
+              <Link to="/experiences">
                 <Button variant="hero" size="xl">
                   <Users className="w-6 h-6 mr-3" />
                   {language === 'nl' ? 'Ontdek Lokale Ervaringen' : 'Discover Local Experiences'}
