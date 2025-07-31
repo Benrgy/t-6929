@@ -56,7 +56,7 @@ const AlgarveHomepage: React.FC = () => {
       ctaEN: 'Compare Flights →',
       icon: <Plane className="w-8 h-8 text-blue-600" />,
       image: '/lovable-uploads/18170e0a-a211-46c5-97e6-3a78c27402e0.png',
-      internalLink: '/vluchten'
+      internalLink: '/flights'
     },
     {
       id: 'experiences',
@@ -148,12 +148,10 @@ const AlgarveHomepage: React.FC = () => {
   };
 
   const handleCardClick = (card: ServiceCard) => {
-    if (card.internalLink) {
-      // Navigate to internal page
-      window.location.href = card.internalLink;
-    } else if (card.affiliateLink) {
+    if (card.affiliateLink) {
       handleAffiliateClick(card.affiliateLink, card.id);
     }
+    // Internal navigation is handled by Link components
   };
 
   const getSeasonPriceIndication = () => {
@@ -346,7 +344,8 @@ const AlgarveHomepage: React.FC = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {serviceCards.map((card, index) => (
+            {serviceCards.map((card, index) => {
+              return (
               <div key={card.id} className="travel-card group cursor-pointer">
                 <div className="relative h-64 overflow-hidden rounded-t-2xl">
                   <img 
@@ -380,12 +379,12 @@ const AlgarveHomepage: React.FC = () => {
                   
                   <div className="space-y-3">
                     {card.internalLink ? (
-                      <Link to={card.internalLink}>
+                      <Link to={card.internalLink} className="block">
                         <Button variant="ocean" size="lg" className="w-full">
                           {language === 'nl' ? card.ctaNL : card.ctaEN}
                         </Button>
                       </Link>
-                    ) : (
+                    ) : card.affiliateLink ? (
                       <Button 
                         variant="ocean" 
                         size="lg"
@@ -394,6 +393,10 @@ const AlgarveHomepage: React.FC = () => {
                       >
                         {language === 'nl' ? card.ctaNL : card.ctaEN}
                         <ExternalLink className="w-4 h-4 ml-2" />
+                      </Button>
+                    ) : (
+                      <Button variant="ocean" size="lg" className="w-full" disabled>
+                        {language === 'nl' ? card.ctaNL : card.ctaEN}
                       </Button>
                     )}
                     
@@ -411,7 +414,8 @@ const AlgarveHomepage: React.FC = () => {
                   </div>
                 </CardContent>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -560,8 +564,8 @@ const AlgarveHomepage: React.FC = () => {
             <div>
               <h4 className="font-semibold mb-3">{language === 'nl' ? 'Volg Ons' : 'Follow Us'}</h4>
               <div className="flex gap-3">
-                <a href="#" className="text-gray-300 hover:text-white">Facebook</a>
-                <a href="#" className="text-gray-300 hover:text-white">Instagram</a>
+                <Link to="/contact" className="text-gray-300 hover:text-white">Contact</Link>
+                <Link to="/over-ons" className="text-gray-300 hover:text-white">Info</Link>
               </div>
             </div>
           </div>

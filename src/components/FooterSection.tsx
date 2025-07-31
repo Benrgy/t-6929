@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { ContentCategory } from '../types/algarve';
 
@@ -52,16 +53,16 @@ const FooterSection: React.FC<FooterSectionProps> = ({ onCategorySelect }) => {
               {language === 'nl' ? 'Informatie' : 'Information'}
             </h4>
             <ul className="space-y-3 text-sm text-gray-300">
-              <li><a href="#" className="hover:text-white transition-colors">
+              <li><Link to="/privacy" className="hover:text-white transition-colors">
                 {language === 'nl' ? 'Privacy Beleid' : 'Privacy Policy'}
-              </a></li>
-              <li><a href="#" className="hover:text-white transition-colors">
+              </Link></li>
+              <li><Link to="/privacy" className="hover:text-white transition-colors">
                 {language === 'nl' ? 'Voorwaarden' : 'Terms of Service'}
-              </a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
-              <li><a href="#blog" className="hover:text-white transition-colors">
-                {language === 'nl' ? 'Blog' : 'Blog'}
-              </a></li>
+              </Link></li>
+              <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+              <li><Link to="/experiences" className="hover:text-white transition-colors">
+                {language === 'nl' ? 'Ervaringen' : 'Experiences'}
+              </Link></li>
             </ul>
           </div>
         </div>
