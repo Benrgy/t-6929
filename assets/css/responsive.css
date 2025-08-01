@@ -1,0 +1,293 @@
+/* Responsive CSS - Mobile & Device Specific Styles */
+
+/* Mobile First Approach - Base styles are mobile */
+
+/* Small phones - 320px and up */
+@media (min-width: 320px) {
+    .container {
+        padding: 0 1rem;
+    }
+}
+
+/* Large phones - 480px and up */
+@media (min-width: 480px) {
+    .hero-stats {
+        flex-direction: row;
+        gap: var(--space-xl);
+    }
+    
+    .price-highlight {
+        flex-direction: row;
+        gap: var(--space-sm);
+    }
+    
+    .newsletter-form {
+        flex-direction: row;
+    }
+    
+    .popup-form {
+        flex-direction: row;
+    }
+}
+
+/* Tablets - 768px and up */
+@media (min-width: 768px) {
+    :root {
+        --space-3xl: 4rem;
+        --space-2xl: 3rem;
+    }
+    
+    .nav-menu {
+        display: flex;
+        position: static;
+        background: transparent;
+        border: none;
+        flex-direction: row;
+        padding: 0;
+    }
+    
+    .mobile-menu-toggle {
+        display: none;
+    }
+    
+    .hero {
+        min-height: 100vh;
+    }
+    
+    .hero-actions {
+        flex-direction: row;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    
+    .tips-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .airlines-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+    
+    .airline-header {
+        flex-direction: row;
+        text-align: left;
+    }
+}
+
+/* Small desktops - 1024px and up */
+@media (min-width: 1024px) {
+    .container {
+        padding: 0 2rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .tips-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .airlines-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .experience-card {
+        display: grid;
+        grid-template-columns: 400px 1fr;
+        align-items: start;
+    }
+    
+    .experience-image {
+        height: 100%;
+        min-height: 400px;
+    }
+}
+
+/* Large desktops - 1280px and up */
+@media (min-width: 1280px) {
+    .container {
+        max-width: 1280px;
+    }
+    
+    .airlines-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .experience-card {
+        grid-template-columns: 500px 1fr;
+    }
+}
+
+/* Extra large screens - 1536px and up */
+@media (min-width: 1536px) {
+    .container {
+        max-width: 1400px;
+    }
+}
+
+/* Device specific optimizations */
+
+/* Touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .btn {
+        min-height: 44px; /* Minimum touch target size */
+        padding: var(--space-md) var(--space-lg);
+    }
+    
+    .nav-link {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .faq-question {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .hero-image,
+    .service-image img,
+    .experience-image img {
+        image-rendering: -webkit-optimize-contrast;
+    }
+}
+
+/* Landscape phones */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        min-height: 100vh;
+        padding: var(--space-xl) 0;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.125rem;
+    }
+    
+    .price {
+        font-size: 2rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    .navbar,
+    .footer,
+    .btn,
+    .newsletter,
+    .popup-overlay {
+        display: none;
+    }
+    
+    .hero {
+        min-height: auto;
+        padding: 2rem 0;
+    }
+    
+    .hero-background {
+        display: none;
+    }
+    
+    .hero-title,
+    .hero-subtitle {
+        color: black;
+    }
+    
+    .section {
+        padding: 1rem 0;
+    }
+    
+    .card,
+    .experience-card,
+    .airline-card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        break-inside: avoid;
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .hero-image,
+    .service-image img,
+    .experience-image img {
+        transform: none !important;
+    }
+    
+    .btn:hover,
+    .card:hover,
+    .service-card:hover,
+    .airline-card:hover {
+        transform: none !important;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: 222 84% 5%;
+        --background-alt: 217 33% 17%;
+        --surface: 215 25% 27%;
+        --surface-alt: 215 19% 35%;
+        --text-primary: 0 0% 100%;
+        --text-secondary: 214 32% 91%;
+        --text-muted: 215 20% 65%;
+    }
+    
+    .navbar {
+        background: rgba(0, 0, 0, 0.95);
+        border-bottom-color: hsl(var(--gray-700));
+    }
+    
+    .hero-background::after {
+        background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4));
+    }
+}
+
+/* Focus styles for accessibility */
+@media (prefers-reduced-motion: no-preference) {
+    .btn:focus,
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus,
+    .nav-link:focus {
+        outline: 2px solid hsl(var(--ocean));
+        outline-offset: 2px;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .btn {
+        border: 2px solid;
+    }
+    
+    .card,
+    .experience-card,
+    .airline-card {
+        border: 2px solid hsl(var(--gray-400));
+    }
+    
+    .hero-background::after {
+        background: rgba(0, 0, 0, 0.8);
+    }
+}

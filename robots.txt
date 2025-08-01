@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Disallow: /assets/js/
+Disallow: /lovable-uploads/
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+# Allow all crawlers to access sitemap
+Sitemap: https://lokaal-genieten-algarve.nl/sitemap.xml
+
+# Host directive
+Host: https://lokaal-genieten-algarve.nl
