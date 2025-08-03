@@ -1,0 +1,117 @@
+{
+  "name": "Lokaal Genieten Algarve - Nederlandse Reistips",
+  "short_name": "Algarve Tips",
+  "description": "De beste lokale tips voor Nederlandse reizigers in de Algarve. Authentiek, betaalbaar en vol verborgen parels.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e40af",
+  "orientation": "portrait-primary",
+  "categories": ["travel", "lifestyle", "productivity"],
+  "lang": "nl",
+  "dir": "ltr",
+  "scope": "/",
+  
+  "icons": [
+    {
+      "src": "/assets/images/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/images/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/images/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/images/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/images/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/images/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/images/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/images/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  
+  "screenshots": [
+    {
+      "src": "/assets/images/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Lokaal Genieten Algarve homepage"
+    },
+    {
+      "src": "/assets/images/screenshot-narrow.png", 
+      "sizes": "375x812",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Lokaal Genieten Algarve mobile view"
+    }
+  ],
+  
+  "shortcuts": [
+    {
+      "name": "Lokale Ervaringen",
+      "short_name": "Ervaringen",
+      "description": "Ontdek verborgen parels en authentieke Algarve ervaringen",
+      "url": "/experiences/",
+      "icons": [{ "src": "/assets/images/shortcut-experiences.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Goedkope Vluchten",
+      "short_name": "Vluchten", 
+      "description": "Vind de beste vliegtuig deals naar de Algarve",
+      "url": "/flights/",
+      "icons": [{ "src": "/assets/images/shortcut-flights.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Contact & Tips",
+      "short_name": "Contact",
+      "description": "Krijg persoonlijk reisadvies van lokale expats",
+      "url": "/contact/",
+      "icons": [{ "src": "/assets/images/shortcut-contact.png", "sizes": "96x96" }]
+    }
+  ],
+  
+  "related_applications": [],
+  "prefer_related_applications": false,
+  
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  }
+}
