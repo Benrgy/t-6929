@@ -576,6 +576,6 @@ const AlgarveHomepage: React.FC = () => {
       </footer>
     </div>
   );
-};
+};;
 
 export default AlgarveHomepage;
